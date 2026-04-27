@@ -17,11 +17,22 @@
   "install": {
     "script": "scripts/install_skill.sh",
     "default_targets": [
-      "~/.agents/skills/government-startup-support"
+      "~/.agents/skills/government-startup-support",
+      "~/.agents/skills/hwpxskill"
     ],
     "optional_targets": [
       "~/.codex/skills/government-startup-support",
-      "~/.claude/skills/government-startup-support"
+      "~/.codex/skills/hwpxskill",
+      "~/.claude/skills/government-startup-support",
+      "~/.claude/skills/hwpxskill"
+    ],
+    "companion_skills": [
+      {
+        "name": "hwpxskill",
+        "repo": "https://github.com/Canine89/hwpxskill",
+        "install_policy": "install_with_this_skill",
+        "reason": "Required companion for HWPX announcement attachments."
+      }
     ]
   },
   "metadata": {
@@ -69,7 +80,12 @@
       "preferred_outputs": [
         "schemas/announcement.schema.json",
         "schemas/fit-analysis.schema.json"
-      ]
+      ],
+      "companion_skill": {
+        "name": "hwpxskill",
+        "repo": "https://github.com/Canine89/hwpxskill",
+        "policy": "Use whenever an announcement attachment is HWPX."
+      }
     }
   }
 }

@@ -46,7 +46,9 @@ cd startup-support-newsletter
 bash scripts/install_skill.sh
 ```
 
-설치 스크립트는 `skills/government-startup-support`를 아래 위치에 복사합니다.
+설치 스크립트는 `skills/government-startup-support`와 HWPX 첨부파일 처리를 위한 `Canine89/hwpxskill`도 함께 설치합니다.
+
+설치 대상은 아래 위치입니다.
 
 - `~/.agents/skills/government-startup-support`
 - `~/.codex/skills/government-startup-support`: `~/.codex/skills`가 이미 있을 때

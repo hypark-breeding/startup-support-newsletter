@@ -44,7 +44,7 @@ cd startup-support-newsletter
 bash scripts/install_skill.sh
 ```
 
-The installer copies `skills/government-startup-support` into:
+The installer copies `skills/government-startup-support` and also installs `Canine89/hwpxskill` for HWPX attachment handling into:
 
 - `~/.agents/skills/government-startup-support`
 - `~/.codex/skills/government-startup-support` when `~/.codex/skills` exists
