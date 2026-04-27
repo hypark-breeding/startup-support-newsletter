@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.1",
+  "name": "government-startup-support",
+  "description": "Find Korean government and public-sector startup support announcements, starting with Seoul, and produce verified briefings or newsletters.",
+  "license": "MIT",
+  "homepage": "https://github.com/Malko-potatos/startup-support-newsletter",
+  "skill_path": "skills/government-startup-support",
+  "entrypoint": "skills/government-startup-support/SKILL.md",
+  "compatibility_paths": [
+    "government-startup-support/SKILL.md"
+  ],
+  "data_paths": [
+    "data/sources.yaml",
+    "data/regions.yaml",
+    "data/keywords.yaml"
+  ],
+  "install": {
+    "script": "scripts/install_skill.sh",
+    "default_targets": [
+      "~/.agents/skills/government-startup-support"
+    ],
+    "optional_targets": [
+      "~/.codex/skills/government-startup-support",
+      "~/.claude/skills/government-startup-support"
+    ]
+  },
+  "metadata": {
+    "category": "startup",
+    "locale": "ko-KR",
+    "phase": "v0",
+    "coverage": ["seoul"],
+    "source_count": 12
+  }
+}

@@ -16,7 +16,8 @@ startup support programs and turning them into regional briefings or newsletters
 ## Scope
 
 - Initial coverage: Seoul metropolitan startup support sources.
-- Primary skill: `government-startup-support/SKILL.md`.
+- Primary installable skill: `skills/government-startup-support/SKILL.md`.
+- Compatibility skill path: `government-startup-support/SKILL.md`.
 - Source registry: `data/sources.yaml`.
 - Regional aliases: `data/regions.yaml`.
 - Search vocabulary: `data/keywords.yaml`.
@@ -31,4 +32,5 @@ startup support programs and turning them into regional briefings or newsletters
 ## Verification
 
 - Run `python3 scripts/validate_sources.py` after changing `data/sources.yaml`.
+- Run `python3 scripts/validate_skill_package.py` after changing install layout.
 - For user-facing answers, cite official source URLs whenever possible.

@@ -13,8 +13,11 @@ The goal is to answer questions like:
 
 This starts as a Skill-first project, not an MCP-first project.
 
-- `government-startup-support/SKILL.md` tells agents how to search, verify, normalize,
-  and summarize startup support announcements.
+- `skills/government-startup-support/SKILL.md` tells agents how to search, verify,
+  normalize, and summarize startup support announcements.
+- `skill-manifest.json` describes the installable skill package for coding agents.
+- `scripts/install_skill.sh` installs the skill into common home-directory agent skill
+  locations.
 - `data/sources.yaml` keeps official and high-value source seeds for Seoul.
 - `data/regions.yaml` maps Seoul districts and aliases.
 - `data/keywords.yaml` captures Korean search terms that announcements commonly use.
@@ -27,7 +30,26 @@ scheduled newsletter delivery becomes necessary.
 
 ```bash
 python3 scripts/validate_sources.py
+python3 scripts/validate_skill_package.py
 ```
+
+## Install As A Skill
+
+For agents that support home-directory skills:
+
+```bash
+git clone https://github.com/Malko-potatos/startup-support-newsletter.git
+cd startup-support-newsletter
+bash scripts/install_skill.sh
+```
+
+The installer copies `skills/government-startup-support` into:
+
+- `~/.agents/skills/government-startup-support`
+- `~/.codex/skills/government-startup-support` when `~/.codex/skills` exists
+- `~/.claude/skills/government-startup-support` when `~/.claude/skills` exists
+
+Agents can also read `skill-manifest.json` and copy the `skill_path` manually.
 
 ## Repository Status
 
