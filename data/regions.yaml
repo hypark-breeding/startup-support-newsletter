@@ -1,0 +1,50 @@
+regions:
+  seoul:
+    ko: 서울
+    aliases:
+      - 서울시
+      - 서울특별시
+      - Seoul
+    districts:
+      - 강남구
+      - 강동구
+      - 강북구
+      - 강서구
+      - 관악구
+      - 광진구
+      - 구로구
+      - 금천구
+      - 노원구
+      - 도봉구
+      - 동대문구
+      - 동작구
+      - 마포구
+      - 서대문구
+      - 서초구
+      - 성동구
+      - 성북구
+      - 송파구
+      - 양천구
+      - 영등포구
+      - 용산구
+      - 은평구
+      - 종로구
+      - 중구
+      - 중랑구
+    startup_clusters:
+      - name: 마포/공덕
+        districts: [마포구]
+      - name: 강남/역삼
+        districts: [강남구]
+      - name: 성수
+        districts: [성동구]
+      - name: 관악S밸리
+        districts: [관악구]
+      - name: 홍릉
+        districts: [동대문구, 성북구]
+      - name: 마곡
+        districts: [강서구]
+      - name: 양재 AI
+        districts: [서초구]
+      - name: 창동
+        districts: [도봉구, 노원구]
