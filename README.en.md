@@ -19,6 +19,7 @@ This starts as a Skill-first project, not an MCP-first project.
 - `data/regions.yaml` maps Seoul districts and aliases.
 - `data/keywords.yaml` captures Korean search terms that announcements commonly use.
 - `docs/` explains collection policy, attachment analysis, calendar output, and newsletter format.
+- `calendar-view/` provides a static calendar UI for normalized collected events.
 
 Add an MCP server later when repeated crawling, change detection, persistent storage, or scheduled newsletter delivery becomes necessary.
 

@@ -44,6 +44,8 @@
     "docs/source-policy.md"
   ],
   "example_paths": [
+    "calendar-view/README.md",
+    "calendar-view/index.html",
     "examples/calendar-events.json",
     "examples/calendar-schedule.md",
     "examples/fit-analysis-report.md",

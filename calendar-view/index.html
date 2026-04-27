@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Startup Support Calendar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,760&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="masthead" aria-labelledby="page-title">
+        <div>
+          <p class="kicker">Seoul Startup Support</p>
+          <h1 id="page-title">창업지원사업 캘린더</h1>
+        </div>
+        <div class="today-card" aria-label="오늘 기준">
+          <span>기준일</span>
+          <strong id="todayLabel">-</strong>
+        </div>
+      </section>
+
+      <section class="toolbar" aria-label="캘린더 조작">
+        <div class="month-controls">
+          <button type="button" class="icon-button" id="prevMonth" aria-label="이전 달">‹</button>
+          <div>
+            <p class="eyebrow">Viewing</p>
+            <h2 id="monthLabel">-</h2>
+          </div>
+          <button type="button" class="icon-button" id="nextMonth" aria-label="다음 달">›</button>
+        </div>
+
+        <div class="filters">
+          <label>
+            <span>이벤트</span>
+            <select id="typeFilter">
+              <option value="all">전체</option>
+              <option value="application_deadline">마감</option>
+              <option value="application_open">접수 시작</option>
+              <option value="briefing">설명회</option>
+              <option value="interview">평가</option>
+              <option value="result_announcement">결과 발표</option>
+              <option value="event">행사</option>
+            </select>
+          </label>
+          <label>
+            <span>JSON 불러오기</span>
+            <input id="jsonInput" type="file" accept="application/json,.json" />
+          </label>
+        </div>
+      </section>
+
+      <section class="summary-strip" aria-label="요약">
+        <article>
+          <span class="metric" id="totalEvents">0</span>
+          <p>전체 일정</p>
+        </article>
+        <article>
+          <span class="metric urgent" id="deadlineEvents">0</span>
+          <p>마감 일정</p>
+        </article>
+        <article>
+          <span class="metric verified" id="highConfidenceEvents">0</span>
+          <p>고신뢰 출처</p>
+        </article>
+      </section>
+
+      <section class="calendar-layout">
+        <div class="calendar-panel">
+          <div class="weekday-row" aria-hidden="true">
+            <span>월</span>
+            <span>화</span>
+            <span>수</span>
+            <span>목</span>
+            <span>금</span>
+            <span>토</span>
+            <span>일</span>
+          </div>
+          <div class="calendar-grid" id="calendarGrid" aria-label="월간 캘린더"></div>
+        </div>
+
+        <aside class="agenda-panel" aria-labelledby="agendaTitle">
+          <div class="agenda-heading">
+            <p class="eyebrow">Date Ordered</p>
+            <h2 id="agendaTitle">다가오는 일정</h2>
+          </div>
+          <div class="agenda-list" id="agendaList"></div>
+        </aside>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
