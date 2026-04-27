@@ -5,6 +5,10 @@ documents rather than in the web page body. Agents should inspect attachments wh
 user asks whether a program is worth applying to, when eligibility is unclear, or when
 the page summary is too thin.
 
+## Document Processor Reuse
+
+Prefer specialized document-processing skills, MCP tools, or local parsers for attachment reading. This project should orchestrate source selection and fit analysis, not reimplement every PDF/HWPX/Word parser. See `docs/document-processing-integrations.md`.
+
 ## File Type Priority
 
 Use this priority when multiple equivalent announcement files are available:

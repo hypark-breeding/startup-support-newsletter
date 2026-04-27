@@ -133,7 +133,9 @@ File type priority:
 2. `hwpx`
 3. `doc` / `docx`
 
-Fallback formats include `hwp`, images, and zip archives. See `docs/attachment-analysis.md`.
+Fallback formats include `hwp`, images, and zip archives. See `docs/attachment-analysis.md` and `docs/document-processing-integrations.md`.
+
+Use available document-processing skills, MCP tools, or local parsers for PDF/HWPX/Word extraction before normalizing the result.
 
 Extract eligibility, exclusions, required documents, evaluation criteria, benefits, obligations, and schedules from the best available attachment. Store local working downloads under `downloads/` and never commit them.
 

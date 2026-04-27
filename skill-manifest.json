@@ -38,6 +38,7 @@
     "docs/business-plan-fit.md",
     "docs/calendar-format.md",
     "docs/collection-workflow.md",
+    "docs/document-processing-integrations.md",
     "docs/mcp-roadmap.md",
     "docs/newsletter-format.md",
     "docs/source-policy.md"
@@ -53,5 +54,20 @@
     "schemas/announcement.schema.json",
     "schemas/business-plan-profile.schema.json",
     "schemas/fit-analysis.schema.json"
-  ]
+  ],
+  "integration_hints": {
+    "document_processing": {
+      "principle": "Reuse specialized document-processing skills, MCP tools, or local parsers for attachment extraction.",
+      "file_priority": [
+        "pdf",
+        "hwpx",
+        "doc",
+        "docx"
+      ],
+      "preferred_outputs": [
+        "schemas/announcement.schema.json",
+        "schemas/fit-analysis.schema.json"
+      ]
+    }
+  }
 }
