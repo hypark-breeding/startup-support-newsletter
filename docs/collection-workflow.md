@@ -8,8 +8,10 @@
 4. Search direct entry URLs first.
 5. Use fallback search queries if navigation or JavaScript blocks discovery.
 6. Normalize candidates into the schema in `government-startup-support/SKILL.md`.
-7. Deduplicate by title, organization, deadline, and application URL.
-8. Rank open official programs first.
+7. Extract application dates, deadlines, briefings, interviews, result dates, and event dates into calendar events.
+8. Deduplicate by title, organization, deadline, and application URL.
+9. Rank open official programs first.
+10. Sort calendar events by date ascending.
 
 ## Seoul Initial Source Strategy
 

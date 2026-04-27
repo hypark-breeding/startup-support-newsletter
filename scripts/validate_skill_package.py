@@ -46,9 +46,10 @@ def main() -> int:
     if not meta.get("description"):
         return fail("SKILL.md description is required")
 
-    for rel_path in manifest.get("data_paths", []):
-        if not (ROOT / rel_path).is_file():
-            return fail(f"Missing manifest data path: {rel_path}")
+    for group_name in ("data_paths", "doc_paths", "example_paths"):
+        for rel_path in manifest.get(group_name, []):
+            if not (ROOT / rel_path).is_file():
+                return fail(f"Missing manifest {group_name} entry: {rel_path}")
 
     print(f"Validated skill package: {manifest['name']}")
     return 0

@@ -16,7 +16,7 @@ regional queries such as "서울 창업지원 정보", "마포구 예비창업 �
 ## What this skill does
 
 It searches official and high-value public-sector sources, normalizes program details,
-and produces an answer or newsletter that helps founders avoid manually visiting many
+and produces an answer, calendar-style schedule, or newsletter that helps founders avoid manually visiting many
 SEO-unfriendly websites.
 
 Initial coverage is Seoul.
@@ -26,6 +26,7 @@ Initial coverage is Seoul.
 - The user asks for startup support programs by region.
 - The user asks for open or upcoming government support announcements.
 - The user asks for a weekly newsletter of startup programs.
+- The user asks to organize scraped programs by date, deadline, or calendar schedule.
 - The user asks for support programs by stage, district, industry, or founder profile.
 
 ## When not to use
@@ -102,6 +103,17 @@ Capture this schema:
     "end": "",
     "status": ""
   },
+  "calendar_events": [
+    {
+      "type": "application_open|application_deadline|event|briefing|interview|result_announcement",
+      "title": "",
+      "date": "YYYY-MM-DD",
+      "time": "",
+      "timezone": "Asia/Seoul",
+      "source_url": "",
+      "notes": ""
+    }
+  ],
   "eligibility_summary": "",
   "contact": "",
   "verified_at": "YYYY-MM-DD",
@@ -109,7 +121,33 @@ Capture this schema:
 }
 ```
 
-### 5. Filter and rank
+### 5. Build calendar events
+
+For every candidate, create date-based events whenever the source provides dates.
+
+Required event types:
+
+- `application_open`: application period start date.
+- `application_deadline`: final application deadline.
+
+Optional event types:
+
+- `event`: orientation, demo day, seminar, or competition date.
+- `briefing`: information session or briefing date.
+- `interview`: evaluation/interview/presentation date.
+- `result_announcement`: expected selection result date.
+
+Rules:
+
+- Use `Asia/Seoul` as the timezone.
+- Convert relative dates to absolute `YYYY-MM-DD` dates.
+- Preserve exact source wording in `notes` when dates are ambiguous.
+- If only a deadline is known, still create an `application_deadline` event.
+- If time is missing, leave `time` empty instead of inventing it.
+- Sort events by date ascending.
+- Use `docs/calendar-format.md` for calendar-style output.
+
+### 6. Filter and rank
 
 Prioritize:
 
@@ -120,7 +158,7 @@ Prioritize:
   global expansion, or loan guarantees.
 - Imminent deadlines.
 
-### 6. Produce the answer
+### 7. Produce the answer
 
 For a short regional answer, provide:
 
@@ -130,7 +168,9 @@ For a short regional answer, provide:
 - Official links.
 - Verification date.
 
-For a newsletter, use `docs/newsletter-format.md`.
+For a calendar-style schedule, use `docs/calendar-format.md`.
+
+For a newsletter, use `docs/newsletter-format.md` and include the calendar section when relevant.
 
 ## Failure Modes
 
@@ -146,5 +186,6 @@ For a newsletter, use `docs/newsletter-format.md`.
 
 - The answer includes official links where possible.
 - Dates are absolute and KST-aware.
+- Date-based programs are also represented as calendar events when possible.
 - Each recommendation has a source and a confidence level.
 - Stale, closed, or uncertain items are labeled.

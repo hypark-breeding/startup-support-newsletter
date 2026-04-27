@@ -10,7 +10,12 @@
 2. Closing Soon
 3. New or Notable Sources
 4. District Spotlight
-5. Watchlist
+5. Calendar Schedule
+6. Watchlist
+
+## Calendar Section
+
+Include a short date-ordered schedule when announcements contain deadlines, briefing dates, evaluation dates, or event dates. Use `docs/calendar-format.md` for detailed event rules.
 
 ## Item Format
 

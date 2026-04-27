@@ -1,0 +1,17 @@
+[
+  {
+    "type": "application_deadline",
+    "title": "Example Startup Program",
+    "date": "2026-02-02",
+    "time": "23:59",
+    "timezone": "Asia/Seoul",
+    "organization": "Example public agency",
+    "region": "seoul",
+    "districts": [],
+    "source_url": "https://example.go.kr/notice",
+    "apply_url": "https://example.go.kr/apply",
+    "status": "open",
+    "confidence": "high",
+    "notes": "Example event only."
+  }
+]
