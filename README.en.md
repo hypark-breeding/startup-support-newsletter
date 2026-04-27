@@ -18,9 +18,13 @@ This starts as a Skill-first project, not an MCP-first project.
 - `data/sources.yaml` keeps official and high-value source seeds for Seoul.
 - `data/regions.yaml` maps Seoul districts and aliases.
 - `data/keywords.yaml` captures Korean search terms that announcements commonly use.
-- `docs/` explains collection policy and newsletter format.
+- `docs/` explains collection policy, attachment analysis, calendar output, and newsletter format.
 
 Add an MCP server later when repeated crawling, change detection, persistent storage, or scheduled newsletter delivery becomes necessary.
+
+## Attachment and Fit Analysis
+
+When an official announcement includes attachments, agents should inspect them before judging fit. File type priority is `pdf > hwpx > word`. User business plans and downloaded attachments should stay local and must not be committed.
 
 ## Quick Checks
 

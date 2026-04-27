@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1",
   "name": "government-startup-support",
-  "description": "Find Korean government and public-sector startup support announcements, starting with Seoul, and produce verified briefings, calendar schedules, or newsletters.",
+  "description": "Find Korean government and public-sector startup support announcements, starting with Seoul, and produce verified briefings, calendar schedules, newsletters, or business-plan fit analyses.",
   "license": "MIT",
   "homepage": "https://github.com/Malko-potatos/startup-support-newsletter",
   "skill_path": "skills/government-startup-support",
@@ -34,16 +34,24 @@
     "source_count": 12
   },
   "doc_paths": [
-    "docs/source-policy.md",
-    "docs/collection-workflow.md",
+    "docs/attachment-analysis.md",
+    "docs/business-plan-fit.md",
     "docs/calendar-format.md",
+    "docs/collection-workflow.md",
+    "docs/mcp-roadmap.md",
     "docs/newsletter-format.md",
-    "docs/mcp-roadmap.md"
+    "docs/source-policy.md"
   ],
   "example_paths": [
-    "examples/seoul-regional-query.md",
-    "examples/weekly-newsletter.md",
+    "examples/calendar-events.json",
     "examples/calendar-schedule.md",
-    "examples/calendar-events.json"
+    "examples/fit-analysis-report.md",
+    "examples/seoul-regional-query.md",
+    "examples/weekly-newsletter.md"
+  ],
+  "schema_paths": [
+    "schemas/announcement.schema.json",
+    "schemas/business-plan-profile.schema.json",
+    "schemas/fit-analysis.schema.json"
   ]
 }

@@ -27,6 +27,7 @@ Initial coverage is Seoul.
 - The user asks for open or upcoming government support announcements.
 - The user asks for a weekly newsletter of startup programs.
 - The user asks to organize scraped programs by date, deadline, or calendar schedule.
+- The user asks whether a program is worth applying to based on an attached announcement and their business plan.
 - The user asks for support programs by stage, district, industry, or founder profile.
 
 ## When not to use
@@ -34,6 +35,7 @@ Initial coverage is Seoul.
 - Direct application submission.
 - Login-only source collection without explicit user approval.
 - Legal, tax, or grant eligibility guarantees.
+- Uploading, committing, or exposing the user's private business plan without explicit approval.
 
 ## Source Priority
 
@@ -121,7 +123,35 @@ Capture this schema:
 }
 ```
 
-### 5. Build calendar events
+### 5. Analyze attachments when needed
+
+If the official page has attached announcement files, inspect them before making fit or eligibility recommendations.
+
+File type priority:
+
+1. `pdf`
+2. `hwpx`
+3. `doc` / `docx`
+
+Fallback formats include `hwp`, images, and zip archives. See `docs/attachment-analysis.md`.
+
+Extract eligibility, exclusions, required documents, evaluation criteria, benefits, obligations, and schedules from the best available attachment. Store local working downloads under `downloads/` and never commit them.
+
+### 6. Compare with the user's business plan when requested
+
+When the user provides or points to a business plan, compare it against the announcement using `docs/business-plan-fit.md`.
+
+Return a recommendation level:
+
+- `strong_apply`
+- `apply_with_edits`
+- `watch_or_prepare`
+- `low_priority`
+- `do_not_apply`
+
+Always separate confirmed disqualifiers from fixable gaps. If the plan file is private, keep analysis local and do not commit or quote sensitive sections unnecessarily.
+
+### 7. Build calendar events
 
 For every candidate, create date-based events whenever the source provides dates.
 
@@ -147,7 +177,7 @@ Rules:
 - Sort events by date ascending.
 - Use `docs/calendar-format.md` for calendar-style output.
 
-### 6. Filter and rank
+### 8. Filter and rank
 
 Prioritize:
 
@@ -158,7 +188,7 @@ Prioritize:
   global expansion, or loan guarantees.
 - Imminent deadlines.
 
-### 7. Produce the answer
+### 9. Produce the answer
 
 For a short regional answer, provide:
 
@@ -167,6 +197,8 @@ For a short regional answer, provide:
 - Why each item fits.
 - Official links.
 - Verification date.
+
+For a fit analysis, use `docs/business-plan-fit.md` and include evidence from the official attachment.
 
 For a calendar-style schedule, use `docs/calendar-format.md`.
 
@@ -187,5 +219,6 @@ For a newsletter, use `docs/newsletter-format.md` and include the calendar secti
 - The answer includes official links where possible.
 - Dates are absolute and KST-aware.
 - Date-based programs are also represented as calendar events when possible.
+- Attachment-based fit analysis uses the priority `pdf > hwpx > word`.
 - Each recommendation has a source and a confidence level.
 - Stale, closed, or uncertain items are labeled.

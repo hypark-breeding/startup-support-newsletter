@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Business Plan Profile",
+  "type": "object",
+  "properties": {
+    "company_name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "founding_date": {
+      "type": "string"
+    },
+    "founder_birth_year": {
+      "type": "integer"
+    },
+    "industry": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stage": {
+      "type": "string"
+    },
+    "product_summary": {
+      "type": "string"
+    },
+    "target_customers": {
+      "type": "string"
+    },
+    "traction": {
+      "type": "string"
+    },
+    "funding_needs": {
+      "type": "string"
+    }
+  }
+}

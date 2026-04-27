@@ -12,3 +12,15 @@ coverage/
 .DS_Store
 Thumbs.db
 *.log
+
+# Local downloaded announcements and private business-plan material
+downloads/*
+!downloads/.gitkeep
+private/*
+!private/.gitkeep
+*.hwp
+*.hwpx
+*.pdf
+*.doc
+*.docx
+*.zip

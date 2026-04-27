@@ -1,6 +1,6 @@
 # Startup Support Newsletter
 
-Agent-installable skill project for finding Korean government startup support announcements and producing regional briefings or newsletters.
+Agent-installable skill project for finding Korean government startup support announcements and producing regional briefings, calendar schedules, newsletters, or business-plan fit analyses.
 
 ## Read This In
 
