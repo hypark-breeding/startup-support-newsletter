@@ -278,21 +278,39 @@ def send_report(config: DeliveryConfig, to_emails: list[str], subject: str, html
     raise ValueError(f"Unsupported provider: {config.provider}")
 
 
-def main() -> int:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Send a designed K-startup report by email.")
     parser.add_argument("--provider", choices=["auto", "smtp", "sendgrid", "mailgun"], default="auto")
     parser.add_argument("--to", action="append", required=True, help="Recipient email. Repeat or comma-separate.")
     parser.add_argument("--subject", required=True)
-    parser.add_argument("--html-file", required=True)
-    parser.add_argument("--text-file")
+    html_group = parser.add_mutually_exclusive_group(required=True)
+    html_group.add_argument("--html-file", help="Path to HTML body file.")
+    html_group.add_argument("--html", help="Raw HTML body string.")
+    text_group = parser.add_mutually_exclusive_group()
+    text_group.add_argument("--text-file")
+    text_group.add_argument("--text", help="Raw text body string.")
     parser.add_argument("--dotenv", default=".env", help="Local env file. Defaults to .env if present.")
     parser.add_argument("--dry-run", action="store_true", help="Resolve config and print a send preview without sending.")
-    args = parser.parse_args()
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    try:
+        args = parser.parse_args(argv)
+    except SystemExit as exc:
+        return int(exc.code) if isinstance(exc.code, int) else 1
 
     to_emails = parse_recipients(args.to)
-    html_body = Path(args.html_file).read_text(encoding="utf-8")
+    if args.html_file:
+        html_body = Path(args.html_file).read_text(encoding="utf-8")
+    else:
+        html_body = args.html or ""
+
     if args.text_file:
         text_body = Path(args.text_file).read_text(encoding="utf-8")
+    elif args.text:
+        text_body = args.text
     else:
         text_body = html_to_text(html_body)
 
