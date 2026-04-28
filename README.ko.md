@@ -15,6 +15,7 @@
 이 프로젝트는 MCP 서버보다 Skill을 먼저 중심에 둡니다.
 
 - `skills/government-startup-support/SKILL.md`: 에이전트가 지원사업을 검색, 검증, 정규화, 요약하는 방법을 설명합니다.
+- `government-startup-support/SKILL.md`: 소스 호환용 경로이며 GitHub 경로 설치 대상은 아닙니다.
 - `skill-manifest.json`: 코딩 에이전트가 읽을 수 있는 설치용 매니페스트입니다.
 - `scripts/install_skill.sh`: 스킬을 에이전트 홈 디렉터리에 설치합니다.
 - `data/sources.yaml`: 전국 공식 소스 시드와 지역별 확장 후보를 관리합니다.
@@ -73,5 +74,7 @@ Codex 내부 옵션 기준으로는 다음 경로입니다.
 ```text
 --repo Malko-potatos/startup-support-newsletter --path skills/government-startup-support
 ```
+
+`government-startup-support/SKILL.md` 경로를 GitHub path install 대상으로 쓰면 `docs`, `data`, `schemas`, `scripts`가 함께 오지 않을 수 있으니 설치 경로로 쓰지 마세요.
 
 설치 후에는 Codex를 재시작해 스킬 인덱스를 다시 로드하세요.

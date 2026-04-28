@@ -5,6 +5,11 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TARGET_SKILL_DIR="${ROOT}/skills/government-startup-support"
 SOURCE_SKILL_MD="${ROOT}/government-startup-support/SKILL.md"
 
+if [ -f "${ROOT}/SKILL.md" ] && [ -d "${ROOT}/data" ] && [ -d "${ROOT}/docs" ] && [ -d "${ROOT}/schemas" ] && [ -d "${ROOT}/scripts" ]; then
+  echo "Skill package is already self-contained: ${ROOT}"
+  exit 0
+fi
+
 if [ ! -f "${SOURCE_SKILL_MD}" ]; then
   echo "Missing source SKILL.md: ${SOURCE_SKILL_MD}" >&2
   exit 1

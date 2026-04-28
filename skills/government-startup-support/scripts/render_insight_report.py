@@ -11,31 +11,62 @@ from typing import Any, Iterable
 STYLE = """
 :root {
   color-scheme: light;
-  --canvas: #f7f4ed;
-  --paper: #fffdf7;
-  --ink: #15231f;
-  --muted: #5e665f;
-  --rule: #d7c7a2;
-  --urgent: #b33a2f;
-  --verified: #1f6f68;
-  --info: #2e4e7e;
+  --canvas: #f6efe4;
+  --paper: #fffaf2;
+  --paper-strong: #fffdf8;
+  --ink: #17352d;
+  --muted: #6f6a5f;
+  --rule: #dbc7aa;
+  --accent: #8c6a43;
+  --accent-soft: #efe1cf;
+  --deadline: #d96c45;
+  --verified: #2d7a63;
+  --info: #4c667f;
+  --shadow: 0 10px 28px rgba(23, 53, 45, 0.06);
 }
 body {
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-family: "IBM Plex Sans KR", "Noto Sans KR", Arial, sans-serif;
-  line-height: 1.6;
+  font-family: "Pretendard", "Pretendard Variable", "Noto Sans KR", Arial, sans-serif;
+  line-height: 1.52;
 }
 .page {
-  max-width: 920px;
+  max-width: 940px;
   margin: 0 auto;
-  padding: 36px 20px 48px;
+  padding: 30px 18px 48px;
 }
 .masthead {
-  border-bottom: 3px solid var(--ink);
-  padding-bottom: 18px;
-  margin-bottom: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(217, 108, 69, 0.12), transparent 34%),
+    radial-gradient(circle at left 22%, rgba(140, 106, 67, 0.10), transparent 28%),
+    linear-gradient(180deg, #fffdf8 0%, #fff8ef 100%);
+  border: 1px solid var(--rule);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 24px 24px 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(140, 106, 67, 0.10);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--deadline);
 }
 h1, h2, h3 {
   font-family: Fraunces, Georgia, serif;
@@ -43,14 +74,15 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 h1 {
-  font-size: 34px;
-  margin: 0 0 12px;
+  font-size: 36px;
+  margin: 14px 0 10px;
+  max-width: 700px;
 }
 h2 {
   font-size: 22px;
   border-bottom: 1px solid var(--rule);
   padding-bottom: 8px;
-  margin: 30px 0 14px;
+  margin: 28px 0 8px;
 }
 h3 {
   font-size: 18px;
@@ -58,29 +90,83 @@ h3 {
 }
 .meta, .muted {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
+}
+.masthead-copy {
+  max-width: 720px;
+}
+.masthead .meta {
+  margin-top: 0;
 }
 .summary {
-  background: var(--paper);
+  background: var(--paper-strong);
   border: 1px solid var(--rule);
-  padding: 18px;
-  margin: 18px 0 24px;
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin: 14px 0 16px;
+  box-shadow: 0 6px 18px rgba(23, 53, 45, 0.04);
+}
+.brief-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.brief-note {
+  background: rgba(255, 250, 242, 0.92);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 11px 12px;
+}
+.brief-label {
+  display: block;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.brief-copy {
+  display: block;
+  margin-top: 6px;
+  color: var(--ink);
+  font-size: 12px;
+  line-height: 1.45;
 }
 .grid {
   display: grid;
-  gap: 12px;
+  gap: 10px;
+}
+.section-intro {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 12px;
 }
 .card {
   background: var(--paper);
   border: 1px solid var(--rule);
-  border-left: 5px solid var(--info);
-  padding: 16px;
+  border-radius: 16px;
+  padding: 12px 14px 11px;
+  box-shadow: 0 6px 16px rgba(23, 53, 45, 0.035);
+  position: relative;
+  overflow: hidden;
 }
-.card.open { border-left-color: var(--verified); }
-.card.procurement { border-left-color: var(--urgent); }
-.card.recurring { border-left-color: var(--urgent); }
-.card.event { border-left-color: var(--info); }
-.card.vc { border-left-color: var(--info); }
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--info);
+}
+.card.open::before { background: var(--verified); }
+.card.procurement::before { background: var(--deadline); }
+.card.recurring::before { background: var(--accent); }
+.card.event::before { background: var(--info); }
+.card.vc::before { background: var(--accent); }
+.card.source::before { background: var(--accent); }
+.card h3 {
+  max-width: 640px;
+}
 .fields {
   display: grid;
   gap: 4px;
@@ -88,26 +174,71 @@ h3 {
 }
 .fields div {
   display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 12px;
+  grid-template-columns: 90px 1fr;
+  gap: 8px;
 }
-.fields dt { font-weight: 700; }
-.fields dd { margin: 0; }
+.fields dt {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 11px;
+  line-height: 1.35;
+}
+.fields dd {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+}
 .badge {
   display: inline-block;
-  border: 1px solid var(--rule);
+  border: 1px solid currentColor;
+  border-radius: 999px;
   padding: 2px 8px;
-  font-size: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.65);
 }
 .badge.high { color: var(--verified); }
 .badge.medium { color: var(--info); }
-.badge.low { color: var(--urgent); }
+.badge.low { color: var(--deadline); }
+.action-list,
+.source-list {
+  background: var(--paper-strong);
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(23, 53, 45, 0.035);
+  padding: 12px 14px 12px 18px;
+}
 ol, ul { padding-left: 22px; }
-a { color: var(--verified); }
+li + li { margin-top: 6px; }
+a {
+  color: var(--verified);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  word-break: break-word;
+}
+.warning-box {
+  margin-top: 18px;
+  background: #fff6ee;
+  border: 1px solid #ecc8b3;
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+.warning-box h3 {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+.footer-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 11px;
+}
 @media (max-width: 640px) {
-  .page { padding: 24px 14px 36px; }
+  .page { padding: 20px 12px 32px; }
+  .masthead { padding: 18px 16px 16px; border-radius: 18px; }
   h1 { font-size: 28px; }
+  .brief-grid { grid-template-columns: 1fr; }
   .fields div { grid-template-columns: 1fr; gap: 0; }
 }
 """
@@ -179,13 +310,13 @@ def render_cards(rows: Iterable[dict[str, Any]], *, css_class: str, fields: list
 def render_list(values: list[str]) -> str:
     if not values:
         return f'<p class="muted">{NO_ITEMS}</p>'
-    return "<ol>" + "".join(f"<li>{escape(value)}</li>" for value in values) + "</ol>"
+    return '<ol class="action-list">' + "".join(f"<li>{escape(value)}</li>" for value in values) + "</ol>"
 
 
 def render_sources(values: list[str]) -> str:
     if not values:
         return f'<p class="muted">{NO_SOURCES}</p>'
-    return "<ul>" + "".join(f"<li>{render_link(value)}</li>" for value in values) + "</ul>"
+    return '<ul class="source-list">' + "".join(f"<li>{render_link(value)}</li>" for value in values) + "</ul>"
 
 
 def render_report_html(report: dict[str, Any]) -> str:
@@ -198,6 +329,11 @@ def render_report_html(report: dict[str, Any]) -> str:
     )
     generated_at = report.get("generated_at") or ""
     region = report.get("region") or ""
+    open_now_items = items(report, "open_now")
+    recurring_items = items(report, "likely_recurring")
+    source_items = items(report, "discovered_sources")
+    vc_items = items(report, "vc_insights")
+    warnings = strings(report, "warnings")
 
     open_fields = [
         ("\uae30\uad00", "organization", "text"),
@@ -262,29 +398,57 @@ def render_report_html(report: dict[str, Any]) -> str:
 <body>
   <main class="page">
     <header class="masthead">
-      <p class="meta">{escape(region)} ? {escape(period)} ? ??? {escape(generated_at)}</p>
-      <h1>{escape(title)}</h1>
+      <span class="eyebrow">Seoul PetTech Brief</span>
+      <div class="masthead-copy">
+        <h1>{escape(title)}</h1>
+        <p class="meta">{escape(region)} · 조사 기간 {escape(period)} · 검증일 {escape(generated_at)}</p>
+      </div>
+      <section class="summary">{escape(report.get("summary") or "")}</section>
+      <div class="brief-grid">
+        <article class="brief-note">
+          <span class="brief-label">Open Now</span>
+          <span class="brief-copy">즉시 검토 가능한 공고는 {len(open_now_items)}건입니다. 서울 전용과 서울 기업이 바로 지원 가능한 중앙부처 공고를 함께 담았습니다.</span>
+        </article>
+        <article class="brief-note">
+          <span class="brief-label">Where To Watch</span>
+          <span class="brief-copy">반복 후보는 {len(recurring_items)}건, 핵심 출처는 {len(source_items)}곳입니다. 펫테크 단독 공고보다 거점·트랙 중심 모니터링이 중요합니다.</span>
+        </article>
+        <article class="brief-note">
+          <span class="brief-label">Partner Signal</span>
+          <span class="brief-copy">투자·파트너십 인사이트는 {len(vc_items)}건입니다. 서울에선 AI, 바이오, 소셜벤처 설명력이 붙을수록 연결 가능성이 높습니다.</span>
+        </article>
+      </div>
     </header>
-    <section class="summary">{escape(report.get("summary") or "")}</section>
 """,
-        "<h2>\uc9c0\uae08 \uc2e0\uccad \uac00\ub2a5\ud55c \uacf5\uace0</h2>",
+        "<h2>지금 신청 가능한 공고</h2>",
+        '<p class="section-intro">마감이 가깝거나 현재 접수 중인 항목만 우선 배치했습니다. 서울 전용 공고와 서울 기업이 바로 지원 가능한 중앙부처 공고를 함께 담았습니다.</p>',
         render_cards(items(report, "open_now"), css_class="open", fields=open_fields),
-        "<h2>\uc62c\ud574 \uc0c8\ub85c \ud655\uc778\ub41c \uacf5\uace0</h2>",
+        "<h2>올해 새로 확인된 공고</h2>",
+        '<p class="section-intro">이미 마감됐더라도 서울 권역 펫테크가 연결하기 좋은 기관과 프로그램 축을 보여주는 항목입니다.</p>',
         render_cards(items(report, "new_this_year"), css_class="open", fields=open_fields),
-        "<h2>\uc785\ucc30/\uc218\uc8fc \uae30\ud68c</h2>",
+        "<h2>입찰/수주 기회</h2>",
         render_cards(items(report, "procurement_opportunities"), css_class="procurement", fields=procurement_fields),
-        "<h2>\ud589\uc0ac\u00b7\ubaa8\uc784</h2>",
+        "<h2>행사·모임</h2>",
         render_cards(items(report, "event_opportunities"), css_class="event", fields=event_fields),
-        "<h2>\uc62c\ud574 \ub2e4\uc2dc \ub728\uac83 \uac00\ub2a5\uc131\uc774 \ub192\uc740 \uacf5\uace0</h2>",
+        "<h2>올해 다시 뜰 가능성이 높은 공고</h2>",
+        '<p class="section-intro">지금 열려 있다고 보기 어렵지만, 시기와 운영 패턴상 다시 확인할 가치가 큰 트랙입니다.</p>',
         render_cards(items(report, "likely_recurring"), css_class="recurring", fields=recurring_fields),
-        "<h2>\uc0c8\ub85c \ubc1c\uacac\ud55c \ucd9c\ucc98</h2>",
+        "<h2>새로 발견한 출처</h2>",
         render_cards(items(report, "discovered_sources"), css_class="source", fields=source_fields),
-        "<h2>\ud22c\uc790/VC \uc778\uc0ac\uc774\ud2b8</h2>",
+        "<h2>투자/VC 인사이트</h2>",
         render_cards(items(report, "vc_insights"), css_class="vc", fields=vc_fields),
-        "<h2>\ub2e4\uc74c \uc561\uc158</h2>",
+        "<h2>다음 액션</h2>",
         render_list(strings(report, "next_actions")),
-        "<h2>\ucd9c\ucc98</h2>",
+        "<h2>출처</h2>",
         render_sources(strings(report, "sources")),
+        (
+            '<section class="warning-box"><h3>주의</h3><ul>'
+            + "".join(f"<li>{escape(item)}</li>" for item in warnings)
+            + "</ul></section>"
+            if warnings
+            else ""
+        ),
+        '<p class="footer-note">이 리포트는 공식 페이지와 공공 포털 기준으로 정리했으며, 실제 지원 전에는 각 공고의 마감 시각과 세부 자격요건을 다시 확인하는 것을 권장합니다.</p>',
         "  </main>\n</body>\n</html>\n",
     ]
     return "".join(sections)

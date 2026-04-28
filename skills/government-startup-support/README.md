@@ -11,6 +11,7 @@ Agent-installable skill project for finding nationwide Korean government startup
 
 - Skill name: `government-startup-support`
 - Skill entrypoint: `skills/government-startup-support/SKILL.md`
+- Source-only compatibility path: `government-startup-support/SKILL.md`
 - Manifest: `skill-manifest.json`
 - Default coverage: nationwide Korea, with URL-optional source discovery
 
@@ -21,3 +22,5 @@ Use this GitHub directory URL so the installer copies a self-contained skill fol
 ```text
 https://github.com/Malko-potatos/startup-support-newsletter/tree/main/skills/government-startup-support
 ```
+
+Do not target `government-startup-support/SKILL.md` for GitHub path installs. That path exists for source compatibility, not as the self-contained install package.

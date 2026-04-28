@@ -17,7 +17,9 @@ startup support programs, procurement notices, events, and investor-adjacent ins
 
 - Default coverage: nationwide Korea. Users may provide no URLs; discovery mode should find official source candidates first.
 - Primary installable skill: `skills/government-startup-support/SKILL.md`.
-- Compatibility skill path: `government-startup-support/SKILL.md`.
+- Source-only compatibility path: `government-startup-support/SKILL.md`.
+- For GitHub path installs, always target `skills/government-startup-support` so bundled
+  `data`, `docs`, `schemas`, and `scripts` are copied with the skill.
 - Source registry: `data/sources.yaml`.
 - Regional aliases: `data/regions.yaml`.
 - Search vocabulary: `data/keywords.yaml`.

@@ -8,7 +8,8 @@
 4. Add city/province, municipal, CCEI, technopark, local public agency, and sector hub sources discovered by GPT Researcher or source fallback queries.
 5. Search direct entry URLs when known.
 6. Use fallback search queries if navigation or JavaScript blocks discovery.
-7. Normalize candidates into the schema in `government-startup-support/SKILL.md`.
+7. Normalize candidates into the schema described in the skill entrypoint `SKILL.md`
+   for the current package.
 8. Extract application dates, deadlines, briefings, interviews, result dates, bid deadlines, registration deadlines, and event dates into calendar events.
 9. Deduplicate by title, organization, deadline, and application URL.
 10. Rank open official programs first.

@@ -72,3 +72,5 @@ Equivalent repo/path form:
 ```
 
 This path includes `SKILL.md` and the bundled `docs`, `data`, `schemas`, and `scripts` directories so references in the skill remain resolvable after installation.
+
+Do not target `government-startup-support/SKILL.md` for GitHub path installs. That path exists for source compatibility and does not represent the self-contained install package boundary.

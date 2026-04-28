@@ -13,6 +13,7 @@ The goal is to answer questions like:
 This starts as a Skill-first project, not an MCP-first project.
 
 - `skills/government-startup-support/SKILL.md` tells agents how to search, verify, normalize, and summarize startup support announcements.
+- `government-startup-support/SKILL.md` remains a source-compatibility path, not the GitHub-path install target.
 - `skill-manifest.json` describes the installable skill package for coding agents.
 - `scripts/install_skill.sh` installs the skill into common home-directory agent skill locations.
 - `data/sources.yaml` keeps national official seeds plus regional expansion candidates.
@@ -69,5 +70,7 @@ In Codex, this maps to:
 ```text
 --repo Malko-potatos/startup-support-newsletter --path skills/government-startup-support
 ```
+
+Do not target `government-startup-support/SKILL.md` for GitHub path installs. That source path does not guarantee bundled `docs`, `data`, `schemas`, and `scripts`.
 
 Restart Codex after installation so the updated skill index is reloaded.

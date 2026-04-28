@@ -3,7 +3,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SKILL_NAME="government-startup-support"
-SOURCE="${ROOT}/skills/${SKILL_NAME}"
+SOURCE=""
 HWPX_SKILL_NAME="hwpxskill"
 HWPX_REPO_URL="${HWPX_REPO_URL:-https://github.com/Canine89/hwpxskill.git}"
 HWPX_CACHE="${ROOT}/.cache/${HWPX_SKILL_NAME}"
@@ -12,14 +12,17 @@ PIP_INSTALL_ARGS="${PIP_INSTALL_ARGS:---user}"
 REQUIRED_PYTHON_PACKAGES=("gpt-researcher" "crawl4ai")
 BUILD_INSTALLABLE_SCRIPT="${ROOT}/scripts/build_installable_skill.sh"
 
-if [ ! -x "${BUILD_INSTALLABLE_SCRIPT}" ]; then
-  echo "Missing installable skill builder: ${BUILD_INSTALLABLE_SCRIPT}" >&2
-  exit 1
-fi
-"${BUILD_INSTALLABLE_SCRIPT}"
-
-if [ ! -f "${SOURCE}/SKILL.md" ]; then
-  echo "Missing skill source: ${SOURCE}/SKILL.md" >&2
+if [ -f "${ROOT}/skill-manifest.json" ] && [ -f "${ROOT}/SKILL.md" ] && [ -d "${ROOT}/data" ] && [ -d "${ROOT}/docs" ]; then
+  SOURCE="${ROOT}"
+elif [ -f "${ROOT}/skills/${SKILL_NAME}/SKILL.md" ]; then
+  SOURCE="${ROOT}/skills/${SKILL_NAME}"
+  if [ ! -f "${BUILD_INSTALLABLE_SCRIPT}" ]; then
+    echo "Missing installable skill builder: ${BUILD_INSTALLABLE_SCRIPT}" >&2
+    exit 1
+  fi
+  bash "${BUILD_INSTALLABLE_SCRIPT}"
+else
+  echo "Could not locate a self-contained skill package or repo-root skill source under: ${ROOT}" >&2
   exit 1
 fi
 
@@ -85,6 +88,11 @@ PY
 }
 
 install_main_skill() {
+  if [ ! -f "${SOURCE}/SKILL.md" ]; then
+    echo "Missing skill source: ${SOURCE}/SKILL.md" >&2
+    exit 1
+  fi
+
   copy_dir "${SOURCE}" "${HOME}/.agents/skills/${SKILL_NAME}" "${SKILL_NAME}"
 
   if [ -d "${HOME}/.codex/skills" ]; then
