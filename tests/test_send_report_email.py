@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import importlib.util
 from pathlib import Path
+import tempfile
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -82,6 +84,61 @@ class SendReportEmailTests(unittest.TestCase):
         self.assertTrue(message.is_multipart())
         self.assertIn("text/plain", message.as_string())
         self.assertIn("text/html", message.as_string())
+
+    def test_main_rejects_conflicting_html_inputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            html_file = Path(tmpdir) / "body.html"
+            html_file.write_text("<p>from-file</p>", encoding="utf-8")
+            argv = [
+                "--to",
+                "founder@example.com",
+                "--subject",
+                "hello",
+                "--html-file",
+                str(html_file),
+                "--html",
+                "<p>from-arg</p>",
+            ]
+            code = emailer.main(argv)
+        self.assertEqual(code, 2)
+
+    def test_main_rejects_conflicting_text_inputs(self) -> None:
+        argv = [
+            "--to",
+            "founder@example.com",
+            "--subject",
+            "hello",
+            "--html",
+            "<p>from-arg</p>",
+            "--text-file",
+            "private/sample.txt",
+            "--text",
+            "from-arg",
+        ]
+        code = emailer.main(argv)
+        self.assertEqual(code, 2)
+
+    def test_main_accepts_inline_html_with_dry_run(self) -> None:
+        env = {
+            "SMTP_HOST": "smtp.example.com",
+            "SMTP_USER": "sender@example.com",
+            "SMTP_PASS": "secret",
+            "SMTP_FROM": "sender@example.com",
+        }
+        argv = [
+            "--to",
+            "founder@example.com",
+            "--subject",
+            "hello",
+            "--html",
+            "<p>Hello</p>",
+            "--dry-run",
+        ]
+
+        with patch.dict(emailer.os.environ, env, clear=True):
+            code = emailer.main(argv)
+
+        self.assertEqual(code, 0)
 
 
 if __name__ == "__main__":
