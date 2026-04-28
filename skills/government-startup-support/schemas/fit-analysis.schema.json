@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Business Plan Fit Analysis",
+  "type": "object",
+  "required": [
+    "recommendation",
+    "score",
+    "summary"
+  ],
+  "properties": {
+    "recommendation": {
+      "type": "string",
+      "enum": [
+        "strong_apply",
+        "apply_with_edits",
+        "watch_or_prepare",
+        "low_priority",
+        "do_not_apply"
+      ]
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "summary": {
+      "type": "string"
+    },
+    "fit_dimensions": {
+      "type": "object"
+    },
+    "strong_matches": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "gaps_to_fix": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "business_plan_edits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "source_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

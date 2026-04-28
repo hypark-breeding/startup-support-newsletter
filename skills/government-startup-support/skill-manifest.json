@@ -1,0 +1,169 @@
+{
+  "schema_version": "0.1",
+  "name": "government-startup-support",
+  "description": "Find nationwide Korean government and public-sector startup support announcements even when the user has no source URLs, then produce verified briefings, calendars, designed reports, newsletters, or email deliveries.",
+  "license": "MIT",
+  "homepage": "https://github.com/Malko-potatos/startup-support-newsletter",
+  "skill_path": "skills/government-startup-support",
+  "entrypoint": "skills/government-startup-support/SKILL.md",
+  "compatibility_paths": [
+    "government-startup-support/SKILL.md"
+  ],
+  "data_paths": [
+    "data/sources.yaml",
+    "data/regions.yaml",
+    "data/keywords.yaml"
+  ],
+  "install": {
+    "script": "scripts/install_skill.sh",
+    "default_targets": [
+      "~/.agents/skills/government-startup-support",
+      "~/.agents/skills/hwpxskill"
+    ],
+    "optional_targets": [
+      "~/.codex/skills/government-startup-support",
+      "~/.codex/skills/hwpxskill",
+      "~/.claude/skills/government-startup-support",
+      "~/.claude/skills/hwpxskill"
+    ],
+    "companion_skills": [
+      {
+        "name": "hwpxskill",
+        "repo": "https://github.com/Canine89/hwpxskill",
+        "install_policy": "install_with_this_skill",
+        "reason": "Required companion for HWPX announcement attachments."
+      }
+    ],
+    "required_python_packages": [
+      {
+        "name": "gpt-researcher",
+        "import_name": "gpt_researcher",
+        "required": true,
+        "reason": "Required for broad opportunity discovery, source synthesis, and insight report research."
+      },
+      {
+        "name": "crawl4ai",
+        "import_name": "crawl4ai",
+        "required": true,
+        "setup_command": "crawl4ai-setup",
+        "reason": "Required for JavaScript-aware page extraction, markdown conversion, link discovery, and attachment discovery."
+      }
+    ]
+  },
+  "metadata": {
+    "category": "startup",
+    "locale": "ko-KR",
+    "phase": "v0",
+    "coverage": [
+      "national",
+      "all_korean_regions"
+    ],
+    "source_count": 19,
+    "research_mode": "nationwide_source_discovery_and_insight",
+    "opportunity_types": [
+      "startup_support",
+      "procurement",
+      "event",
+      "meetup",
+      "vc_insight"
+    ],
+    "input_assumptions": {
+      "default_region": "national",
+      "user_urls_optional": true,
+      "discover_sources_when_urls_missing": true,
+      "source_list_not_complete": true
+    }
+  },
+  "doc_paths": [
+    "docs/attachment-analysis.md",
+    "docs/business-plan-fit.md",
+    "docs/calendar-format.md",
+    "docs/collection-workflow.md",
+    "docs/document-processing-integrations.md",
+    "docs/mcp-roadmap.md",
+    "docs/newsletter-format.md",
+    "docs/source-policy.md",
+    "docs/email-delivery.md",
+    "docs/research-insights.md",
+    "docs/procurement-opportunities.md",
+    "docs/events-and-meetups.md"
+  ],
+  "example_paths": [
+    "calendar-view/README.md",
+    "calendar-view/index.html",
+    "examples/calendar-events.json",
+    "examples/calendar-schedule.md",
+    "examples/fit-analysis-report.md",
+    "examples/seoul-regional-query.md",
+    "examples/weekly-newsletter.md"
+  ],
+  "schema_paths": [
+    "schemas/announcement.schema.json",
+    "schemas/business-plan-profile.schema.json",
+    "schemas/fit-analysis.schema.json",
+    "schemas/insight-report.schema.json",
+    "schemas/procurement-opportunity.schema.json",
+    "schemas/event-opportunity.schema.json"
+  ],
+  "integration_hints": {
+    "document_processing": {
+      "principle": "Reuse specialized document-processing skills, MCP tools, or local parsers for attachment extraction.",
+      "file_priority": [
+        "pdf",
+        "hwpx",
+        "doc",
+        "docx"
+      ],
+      "preferred_outputs": [
+        "schemas/announcement.schema.json",
+        "schemas/fit-analysis.schema.json"
+      ],
+      "companion_skill": {
+        "name": "hwpxskill",
+        "repo": "https://github.com/Canine89/hwpxskill",
+        "policy": "Use whenever an announcement attachment is HWPX."
+      }
+    },
+    "research_insights": {
+      "principle": "If the user does not provide URLs, use GPT Researcher for nationwide source discovery and synthesis, then use Crawl4AI to extract candidate official pages and verify evidence.",
+      "default_window": "last_12_months_kst",
+      "external_tools": [
+        "gpt-researcher",
+        "crawl4ai"
+      ],
+      "email_delivery": {
+        "script": "scripts/send_report_email.py",
+        "providers": [
+          "smtp",
+          "sendgrid",
+          "mailgun"
+        ]
+      },
+      "install_policy": "required_with_skill_install",
+      "required_python_packages": [
+        "gpt-researcher",
+        "crawl4ai"
+      ],
+      "default_scope": "nationwide_korea"
+    },
+    "procurement": {
+      "principle": "Use official nationwide KONEPS/Data.go.kr sources first, then discover municipal contract sources for regional bid and public purchase opportunities.",
+      "required_env_vars_for_api": [
+        "DATA_GO_KR_SERVICE_KEY"
+      ],
+      "schemas": [
+        "schemas/procurement-opportunity.schema.json"
+      ]
+    },
+    "events_and_meetups": {
+      "principle": "Search official event pages and high-value ecosystem sources, then keep events separate from grants and procurement.",
+      "schemas": [
+        "schemas/event-opportunity.schema.json"
+      ]
+    }
+  },
+  "script_paths": [
+    "scripts/render_insight_report.py",
+    "scripts/send_report_email.py"
+  ]
+}

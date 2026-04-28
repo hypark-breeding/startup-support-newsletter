@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Startup Support Announcement",
+  "type": "object",
+  "required": [
+    "title",
+    "organization",
+    "source_url",
+    "verified_at"
+  ],
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "organization": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "apply_url": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "file_type": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "eligibility": {
+      "type": "string"
+    },
+    "exclusions": {
+      "type": "string"
+    },
+    "benefits": {
+      "type": "string"
+    },
+    "required_documents": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluation_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "obligations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "verified_at": {
+      "type": "string"
+    }
+  }
+}

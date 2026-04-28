@@ -1,0 +1,217 @@
+regions:
+  national:
+    ko: 전국
+    aliases:
+    - 전국
+    - 전국권
+    - 대한민국
+    - 한국
+    - Korea
+    - national
+    - nationwide
+    included_regions:
+    - 서울
+    - 부산
+    - 대구
+    - 인천
+    - 광주
+    - 대전
+    - 울산
+    - 세종
+    - 경기
+    - 강원
+    - 충북
+    - 충남
+    - 전북
+    - 전남
+    - 경북
+    - 경남
+    - 제주
+  seoul:
+    ko: 서울
+    aliases:
+    - 서울시
+    - 서울특별시
+    - Seoul
+    districts:
+    - 강남구
+    - 강동구
+    - 강북구
+    - 강서구
+    - 관악구
+    - 광진구
+    - 구로구
+    - 금천구
+    - 노원구
+    - 도봉구
+    - 동대문구
+    - 동작구
+    - 마포구
+    - 서대문구
+    - 서초구
+    - 성동구
+    - 성북구
+    - 송파구
+    - 양천구
+    - 영등포구
+    - 용산구
+    - 은평구
+    - 종로구
+    - 중구
+    - 중랑구
+    startup_clusters:
+    - name: 마포/공덕
+      districts:
+      - 마포구
+    - name: 강남/역삼
+      districts:
+      - 강남구
+    - name: 성수
+      districts:
+      - 성동구
+    - name: 관악S밸리
+      districts:
+      - 관악구
+    - name: 홍릉
+      districts:
+      - 동대문구
+      - 성북구
+    - name: 마곡
+      districts:
+      - 강서구
+    - name: 양재 AI
+      districts:
+      - 서초구
+    - name: 창동
+      districts:
+      - 도봉구
+      - 노원구
+  busan:
+    ko: 부산
+    aliases:
+    - 부산시
+    - 부산광역시
+    - Busan
+    districts: []
+    startup_clusters: []
+  daegu:
+    ko: 대구
+    aliases:
+    - 대구시
+    - 대구광역시
+    - Daegu
+    districts: []
+    startup_clusters: []
+  incheon:
+    ko: 인천
+    aliases:
+    - 인천시
+    - 인천광역시
+    - Incheon
+    districts: []
+    startup_clusters: []
+  gwangju:
+    ko: 광주
+    aliases:
+    - 광주시
+    - 광주광역시
+    - Gwangju
+    districts: []
+    startup_clusters: []
+  daejeon:
+    ko: 대전
+    aliases:
+    - 대전시
+    - 대전광역시
+    - Daejeon
+    districts: []
+    startup_clusters: []
+  ulsan:
+    ko: 울산
+    aliases:
+    - 울산시
+    - 울산광역시
+    - Ulsan
+    districts: []
+    startup_clusters: []
+  sejong:
+    ko: 세종
+    aliases:
+    - 세종시
+    - 세종특별자치시
+    - Sejong
+    districts: []
+    startup_clusters: []
+  gyeonggi:
+    ko: 경기
+    aliases:
+    - 경기도
+    - 경기권
+    - Gyeonggi
+    districts: []
+    startup_clusters: []
+  gangwon:
+    ko: 강원
+    aliases:
+    - 강원도
+    - 강원특별자치도
+    - Gangwon
+    districts: []
+    startup_clusters: []
+  chungbuk:
+    ko: 충북
+    aliases:
+    - 충청북도
+    - Chungbuk
+    - North Chungcheong
+    districts: []
+    startup_clusters: []
+  chungnam:
+    ko: 충남
+    aliases:
+    - 충청남도
+    - Chungnam
+    - South Chungcheong
+    districts: []
+    startup_clusters: []
+  jeonbuk:
+    ko: 전북
+    aliases:
+    - 전라북도
+    - 전북특별자치도
+    - Jeonbuk
+    - North Jeolla
+    districts: []
+    startup_clusters: []
+  jeonnam:
+    ko: 전남
+    aliases:
+    - 전라남도
+    - Jeonnam
+    - South Jeolla
+    districts: []
+    startup_clusters: []
+  gyeongbuk:
+    ko: 경북
+    aliases:
+    - 경상북도
+    - Gyeongbuk
+    - North Gyeongsang
+    districts: []
+    startup_clusters: []
+  gyeongnam:
+    ko: 경남
+    aliases:
+    - 경상남도
+    - Gyeongnam
+    - South Gyeongsang
+    districts: []
+    startup_clusters: []
+  jeju:
+    ko: 제주
+    aliases:
+    - 제주도
+    - 제주특별자치도
+    - Jeju
+    districts: []
+    startup_clusters: []

@@ -1,0 +1,555 @@
+sources:
+- id: seoul-startup-plus
+  name: Startup Plus
+  name_ko: 스타트업플러스
+  region: seoul
+  districts: []
+  organization_type: seoul_startup_portal
+  source_priority: official
+  coverage_priority: high
+  base_url: https://www.startup-plus.kr
+  entry_urls:
+  - https://www.startup-plus.kr
+  - https://www.startup-plus.kr/project
+  topics:
+  - grants
+  - acceleration
+  - space
+  - global
+  - finance
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - 스타트업플러스 지원사업
+  - 서울 스타트업 지원사업
+  - 서울창업허브 모집공고
+  fallback_search_queries:
+  - site:startup-plus.kr/project 서울 스타트업 지원사업
+  - site:startup-plus.kr/project 창업지원 모집 공고
+  notes: Primary Seoul startup support application surface. Often referenced by SBA
+    and Seoul startup hub programs.
+- id: seoul-business-agency
+  name: Seoul Business Agency
+  name_ko: 서울경제진흥원
+  region: seoul
+  districts: []
+  organization_type: seoul_affiliated_agency
+  source_priority: official
+  coverage_priority: high
+  base_url: https://www.sba.seoul.kr
+  entry_urls:
+  - https://www.sba.seoul.kr
+  topics:
+  - grants
+  - global
+  - finance
+  - cluster
+  - startup_hub
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - 서울경제진흥원 창업지원
+  - SBA 스타트업 모집
+  - 서울창업허브 지원사업
+  fallback_search_queries:
+  - site:sba.seoul.kr 창업지원 모집
+  - site:sba.seoul.kr 스타트업 지원사업 공고
+  notes: Seoul city's major economic and startup support agency. Cross-check related
+    applications on Startup Plus.
+- id: seoul-ccei
+  name: Seoul Center for Creative Economy & Innovation
+  name_ko: 서울창조경제혁신센터
+  region: seoul
+  districts: []
+  organization_type: creative_economy_center
+  source_priority: official
+  coverage_priority: high
+  base_url: https://ccei.creativekorea.or.kr/seoul
+  entry_urls:
+  - https://ccei.creativekorea.or.kr/seoul
+  - https://ccei.creativekorea.or.kr
+  topics:
+  - acceleration
+  - open_innovation
+  - local_creator
+  - education
+  - events
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - 서울창조경제혁신센터 지원사업공고
+  - 서울창조경제혁신센터 스타트업 모집
+  fallback_search_queries:
+  - site:ccei.creativekorea.or.kr/seoul 지원사업공고 스타트업
+  - site:ccei.creativekorea.or.kr/seoul 창업지원 모집
+  notes: Official CCEI channel. Also check national CCEI pages when Seoul-specific
+    routing changes.
+- id: seoul-campustown
+  name: Seoul Campus Town
+  name_ko: 서울캠퍼스타운
+  region: seoul
+  districts: []
+  organization_type: seoul_city_university_program
+  source_priority: official
+  coverage_priority: high
+  base_url: https://campustown.seoul.go.kr
+  entry_urls:
+  - https://campustown.seoul.go.kr/site/main/home
+  - https://campustown.seoul.go.kr/site/main/board/university_news/list
+  topics:
+  - campus_town
+  - competition
+  - space
+  - youth_startup
+  - university
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - 서울캠퍼스타운 창업경진대회 모집
+  - 캠퍼스타운 입주기업 모집
+  fallback_search_queries:
+  - site:campustown.seoul.go.kr 창업경진대회 모집 공고
+  - site:campustown.seoul.go.kr 입주기업 모집 창업
+  notes: Important for youth founders, university-linked startups, and district-specific
+    campus programs.
+- id: bizinfo-national
+  name: Bizinfo Support Programs
+  name_ko: 기업마당 지원사업 공고
+  region: national
+  districts: []
+  organization_type: national_aggregator
+  source_priority: official_aggregator
+  coverage_priority: high
+  base_url: https://www.bizinfo.go.kr
+  entry_urls:
+  - https://www.bizinfo.go.kr
+  topics:
+  - grants
+  - finance
+  - export
+  - sme
+  - startup
+  crawl_difficulty: low
+  freshness: frequent
+  search_hints:
+  - 기업마당 창업 지원사업
+  - 기업마당 전국 스타트업 지원사업
+  - 기업마당 지자체 창업지원
+  fallback_search_queries:
+  - site:bizinfo.go.kr 창업 지원사업 모집
+  - site:bizinfo.go.kr 스타트업 지원사업 공고
+  notes: Official national aggregator for central-government, local-government, and
+    public-institution support programs. Use when the user does not provide URLs.
+- id: k-startup-national
+  name: K-Startup
+  name_ko: K-Startup 창업지원포털
+  region: national
+  districts: []
+  organization_type: national_startup_portal
+  source_priority: official
+  coverage_priority: high
+  base_url: https://www.k-startup.go.kr
+  entry_urls:
+  - https://www.k-startup.go.kr
+  topics:
+  - grants
+  - national_programs
+  - startup
+  - education
+  - competitions
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - K-Startup 창업지원사업
+  - K-Startup 모집공고
+  - K-Startup 전국 창업지원
+  fallback_search_queries:
+  - site:k-startup.go.kr 창업지원 모집
+  - site:k-startup.go.kr 스타트업 공고
+  notes: Official national startup portal. Start here for nationwide startup support,
+    calendars, education, competitions, and cross-checking.
+- id: ccei-national
+  name: Creative Economy Innovation Centers
+  name_ko: 창조경제혁신센터 통합 홈페이지
+  region: national
+  districts: []
+  organization_type: national_regional_startup_hub_network
+  source_priority: official
+  coverage_priority: high
+  base_url: https://ccei.creativekorea.or.kr
+  entry_urls:
+  - https://ccei.creativekorea.or.kr
+  topics:
+  - acceleration
+  - open_innovation
+  - regional_programs
+  - education
+  - events
+  - vc_insights
+  opportunity_types:
+  - startup_support
+  - event
+  - meetup
+  - vc_insight
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - 창조경제혁신센터 지원사업공고
+  - 창조경제혁신센터 스타트업 모집
+  - 지역 창조경제혁신센터 행사
+  fallback_search_queries:
+  - site:ccei.creativekorea.or.kr 지원사업공고 스타트업
+  - site:ccei.creativekorea.or.kr 창업지원 모집
+  notes: Official integrated site for the national CCEI network. Use it to discover
+    regional center pages when the user has no source URL.
+- id: smes-go-kr-policy-notices
+  name: SMEs24 Policy Notices
+  name_ko: 중소벤처24 사업공고
+  region: national
+  districts: []
+  organization_type: national_sme_policy_portal
+  source_priority: official
+  coverage_priority: high
+  base_url: https://www.smes.go.kr
+  entry_urls:
+  - https://www.smes.go.kr/main/sportsBsnsPolicy
+  topics:
+  - grants
+  - finance
+  - sme
+  - startup
+  - policy_funds
+  - public_programs
+  opportunity_types:
+  - startup_support
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - 중소벤처24 사업공고
+  - 중소벤처24 창업 지원사업
+  - 중소벤처24 정책자금
+  fallback_search_queries:
+  - site:smes.go.kr/main/sportsBsnsPolicy 창업 지원사업
+  - site:smes.go.kr 사업공고 스타트업
+  notes: Official Ministry of SMEs and Startups integrated portal for policy notices
+    and applications. Useful as a national seed when URLs are missing.
+- id: seoul-techno-park
+  name: Seoul Technopark
+  name_ko: 서울테크노파크
+  region: seoul
+  districts: []
+  organization_type: regional_innovation_agency
+  source_priority: official
+  coverage_priority: medium
+  base_url: https://www.seoultp.or.kr
+  entry_urls:
+  - https://www.seoultp.or.kr
+  topics:
+  - technology_commercialization
+  - rnd
+  - sme
+  - manufacturing
+  crawl_difficulty: medium
+  freshness: periodic
+  search_hints:
+  - 서울테크노파크 지원사업
+  - 서울테크노파크 기술사업화
+  fallback_search_queries:
+  - site:seoultp.or.kr 지원사업 공고 창업
+  - site:seoultp.or.kr 기술사업화 지원사업
+  notes: Useful for technology commercialization and SME/startup R&D-adjacent programs.
+- id: gwanak-s-valley
+  name: Gwanak S Valley
+  name_ko: 관악S밸리 / 관악중소벤처진흥원
+  region: seoul
+  districts:
+  - 관악구
+  organization_type: district_startup_cluster
+  source_priority: official
+  coverage_priority: medium
+  base_url: https://www.gsva.or.kr
+  entry_urls:
+  - https://www.gsva.or.kr
+  - https://www.gsva.or.kr/main/pst/list.do?pst_id=announce
+  topics:
+  - district_programs
+  - space
+  - consulting
+  - global
+  - startup_cluster
+  crawl_difficulty: low
+  freshness: frequent
+  search_hints:
+  - 관악S밸리 지원사업
+  - 관악구 창업기업 모집
+  - 관악중소벤처진흥원 공고
+  fallback_search_queries:
+  - site:gsva.or.kr 관악S밸리 모집 공고
+  - site:gsva.or.kr 창업 지원사업
+  notes: High-value district source for Gwanak startup cluster programs.
+- id: youth-seoul
+  name: Seoul Youth Portal
+  name_ko: 청년몽땅정보통
+  region: seoul
+  districts: []
+  organization_type: seoul_youth_portal
+  source_priority: official
+  coverage_priority: medium
+  base_url: https://youth.seoul.go.kr
+  entry_urls:
+  - https://youth.seoul.go.kr
+  topics:
+  - youth_startup
+  - education
+  - jobs
+  - founder_support
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - 청년몽땅정보통 창업지원
+  - 서울 청년 창업 지원
+  fallback_search_queries:
+  - site:youth.seoul.go.kr 창업지원 모집
+  - site:youth.seoul.go.kr 청년창업 지원사업
+  notes: Useful for youth founder programs, but many results may be broader employment
+    or education programs.
+- id: seoul-50plus
+  name: Seoul 50 Plus Foundation
+  name_ko: 서울시50플러스재단
+  region: seoul
+  districts: []
+  organization_type: seoul_affiliated_foundation
+  source_priority: official
+  coverage_priority: medium
+  base_url: https://rpt.50plus.or.kr
+  entry_urls:
+  - https://rpt.50plus.or.kr
+  topics:
+  - middle_age_founders
+  - jobs
+  - hiring_support
+  - career_transition
+  crawl_difficulty: medium
+  freshness: periodic
+  search_hints:
+  - 서울시50플러스재단 창업
+  - 중장년 창업 지원 서울
+  fallback_search_queries:
+  - site:50plus.or.kr 창업 지원사업
+  - site:rpt.50plus.or.kr 창업 지원 공고
+  notes: Include for middle-aged founders and employer support programs adjacent to
+    startups.
+- id: seoul-ai-hub
+  name: Seoul AI Hub
+  name_ko: 서울AI허브
+  region: seoul
+  districts:
+  - 서초구
+  organization_type: sector_startup_hub
+  source_priority: official
+  coverage_priority: medium
+  base_url: https://www.seoulaihub.kr
+  entry_urls:
+  - https://www.seoulaihub.kr
+  topics:
+  - ai
+  - acceleration
+  - space
+  - rnd
+  - global
+  crawl_difficulty: medium
+  freshness: periodic
+  search_hints:
+  - 서울AI허브 입주기업 모집
+  - 서울AI허브 지원사업
+  fallback_search_queries:
+  - site:seoulaihub.kr 입주기업 모집
+  - site:seoulaihub.kr 스타트업 지원사업
+  notes: Sector-specific source for AI startups around Yangjae/Seoul AI cluster.
+- id: seoul-biohub
+  name: Seoul Bio Hub
+  name_ko: 서울바이오허브
+  region: seoul
+  districts:
+  - 동대문구
+  organization_type: sector_startup_hub
+  source_priority: official
+  coverage_priority: medium
+  base_url: https://www.seoulbiohub.kr
+  entry_urls:
+  - https://www.seoulbiohub.kr
+  topics:
+  - bio
+  - healthcare
+  - space
+  - global
+  - acceleration
+  crawl_difficulty: medium
+  freshness: periodic
+  search_hints:
+  - 서울바이오허브 입주기업 모집
+  - 서울바이오허브 창업지원
+  fallback_search_queries:
+  - site:seoulbiohub.kr 입주기업 모집
+  - site:seoulbiohub.kr 창업 지원사업
+  notes: Sector-specific source for bio and healthcare startups in Hongneung cluster.
+- id: g2b-bid-notices
+  name: KONEPS Bid Notices
+  name_ko: 나라장터 입찰공고
+  region: national
+  districts: []
+  organization_type: national_procurement_portal
+  source_priority: official
+  coverage_priority: high
+  base_url: https://www.g2b.go.kr
+  entry_urls:
+  - https://www.g2b.go.kr
+  topics:
+  - procurement
+  - bid_notices
+  - public_contracts
+  - services
+  - goods
+  - construction
+  opportunity_types:
+  - procurement
+  crawl_difficulty: high
+  freshness: frequent
+  search_hints:
+  - 입찰공고
+  - 용역 입찰 스타트업
+  - AI 용역 입찰
+  fallback_search_queries:
+  - site:g2b.go.kr 입찰공고 용역
+  - site:g2b.go.kr 제안요청서 스타트업
+  notes: Official KONEPS portal. Browser access can be difficult, so prefer the public
+    Data.go.kr bid notice API when possible.
+- id: data-go-kr-g2b-bid-api
+  name: KONEPS Bid Notice API
+  name_ko: 조달청 나라장터 입찰공고정보서비스
+  region: national
+  districts: []
+  organization_type: public_data_api
+  source_priority: official_api
+  coverage_priority: high
+  base_url: https://www.data.go.kr
+  entry_urls:
+  - https://www.data.go.kr/data/15129394/openapi.do
+  topics:
+  - procurement
+  - bid_notices
+  - public_contracts
+  - api
+  - services
+  - goods
+  - construction
+  opportunity_types:
+  - procurement
+  requires_api_key: true
+  env_vars:
+  - DATA_GO_KR_SERVICE_KEY
+  crawl_difficulty: low
+  freshness: frequent
+  search_hints:
+  - 조달청 나라장터 입찰공고정보서비스
+  - 나라장터 입찰 API
+  fallback_search_queries:
+  - site:data.go.kr/data/15129394 조달청 나라장터 입찰공고정보서비스
+  notes: Official Data.go.kr API for KONEPS bid notices. Ask for DATA_GO_KR_SERVICE_KEY
+    before live API calls.
+- id: seoul-contract-market
+  name: Seoul Contract Market
+  name_ko: 서울계약마당
+  region: seoul
+  districts: []
+  organization_type: municipal_contract_portal
+  source_priority: official
+  coverage_priority: high
+  base_url: https://contract.seoul.go.kr
+  entry_urls:
+  - https://contract.seoul.go.kr/
+  topics:
+  - procurement
+  - municipal_contracts
+  - bid_notices
+  - purchase
+  - public_purchase
+  opportunity_types:
+  - procurement
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - 서울계약마당 입찰공고
+  - 서울시 발주계획
+  - 서울시 공개견적요청
+  fallback_search_queries:
+  - site:contract.seoul.go.kr 입찰공고
+  - site:contract.seoul.go.kr 서울시 발주계획
+  notes: Official Seoul contract portal with bid notices, ordering plans, public quote
+    requests, opening results, and public purchase links.
+- id: k-startup-events
+  name: K-Startup Events and Education
+  name_ko: K-Startup 행사·교육
+  region: national
+  districts: []
+  organization_type: national_startup_portal
+  source_priority: official
+  coverage_priority: medium
+  base_url: https://www.k-startup.go.kr
+  entry_urls:
+  - https://www.k-startup.go.kr
+  topics:
+  - events
+  - education
+  - meetups
+  - demo_day
+  - networking
+  - startup_support
+  opportunity_types:
+  - event
+  - meetup
+  - startup_support
+  crawl_difficulty: medium
+  freshness: frequent
+  search_hints:
+  - K-Startup 행사
+  - K-Startup 창업 교육
+  - K-Startup 네트워킹
+  fallback_search_queries:
+  - site:k-startup.go.kr 창업 행사
+  - site:k-startup.go.kr 데모데이 OR 세미나
+  notes: Official national startup portal. Use for education, demo days, networking,
+    and event-style opportunities alongside support programs.
+- id: startup-alliance-events
+  name: Startup Alliance Events
+  name_ko: 스타트업얼라이언스 행사
+  region: national
+  districts: []
+  organization_type: startup_ecosystem_nonprofit
+  source_priority: high_value_public
+  coverage_priority: medium
+  base_url: https://startupall.kr
+  entry_urls:
+  - https://startupall.kr/
+  - https://www.startupalliance.kr/
+  topics:
+  - events
+  - meetups
+  - networking
+  - vc_insights
+  - ecosystem_reports
+  opportunity_types:
+  - event
+  - meetup
+  - vc_insight
+  crawl_difficulty: low
+  freshness: frequent
+  search_hints:
+  - 스타트업얼라이언스 행사
+  - 스타트업 밋업
+  - 스타트업 생태계 행사
+  fallback_search_queries:
+  - site:startupall.kr 스타트업얼라이언스 행사
+  - site:startupalliance.kr 밋업 OR 네트워킹
+  notes: High-value ecosystem source for startup events, meetups, conference updates,
+    reports, and investor-adjacent context.

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Event Opportunity",
+  "type": "object",
+  "required": [
+    "title",
+    "host",
+    "event_date",
+    "source_url",
+    "verified_at"
+  ],
+  "properties": {
+    "opportunity_type": {
+      "type": "string",
+      "enum": [
+        "event",
+        "meetup"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "host": {
+      "type": "string"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "event",
+        "meetup",
+        "demo_day",
+        "webinar",
+        "education",
+        "conference",
+        "office_hours"
+      ]
+    },
+    "event_date": {
+      "type": "string"
+    },
+    "registration_deadline": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "string"
+    },
+    "cost": {
+      "type": "string"
+    },
+    "registration_url": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "verified_at": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    }
+  }
+}
