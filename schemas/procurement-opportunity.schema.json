@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Procurement Opportunity",
+  "type": "object",
+  "required": [
+    "title",
+    "buyer",
+    "source_url",
+    "verified_at"
+  ],
+  "properties": {
+    "opportunity_type": {
+      "type": "string",
+      "const": "procurement"
+    },
+    "title": {
+      "type": "string"
+    },
+    "buyer": {
+      "type": "string"
+    },
+    "procurement_channel": {
+      "type": "string"
+    },
+    "procurement_type": {
+      "type": "string"
+    },
+    "bid_notice_no": {
+      "type": "string"
+    },
+    "budget": {
+      "type": "string"
+    },
+    "bid_deadline": {
+      "type": "string"
+    },
+    "contract_method": {
+      "type": "string"
+    },
+    "eligibility": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "detail_url": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "verified_at": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    }
+  }
+}

@@ -26,11 +26,10 @@ python3 scripts/validate_sources.py
 
 ## Review Cadence
 
-- High-priority Seoul-wide sources: monthly
-- District and sector sources: quarterly
-- Low-confidence sources: verify before each use
+- High-priority national sources: monthly
+- City/province, municipal, district, and sector sources: quarterly
+- Low-confidence sources discovered from search: verify before each use
 
 ## Promotion Rule
 
-Promote a source to `high` coverage only if it repeatedly publishes startup support
-programs or acts as an official application surface.
+Promote a source to `high` coverage only if it repeatedly publishes startup support, procurement, or event opportunities, or acts as an official application surface.

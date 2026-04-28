@@ -1,0 +1,323 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Startup Support Insight Report",
+  "type": "object",
+  "required": [
+    "title",
+    "region",
+    "date_range",
+    "generated_at",
+    "summary",
+    "sources"
+  ],
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "date_range": {
+      "type": "object",
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "open_now": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/currentOpportunity"
+      }
+    },
+    "new_this_year": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/currentOpportunity"
+      }
+    },
+    "likely_recurring": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/recurringOpportunity"
+      }
+    },
+    "discovered_sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/discoveredSource"
+      }
+    },
+    "vc_insights": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/vcInsight"
+      }
+    },
+    "next_actions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "procurement_opportunities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/procurementOpportunity"
+      }
+    },
+    "event_opportunities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/eventOpportunity"
+      }
+    }
+  },
+  "$defs": {
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "currentOpportunity": {
+      "type": "object",
+      "required": [
+        "title",
+        "organization",
+        "source_url",
+        "confidence"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "deadline": {
+          "type": "string"
+        },
+        "application_period": {
+          "type": "string"
+        },
+        "why_it_matters": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      }
+    },
+    "recurringOpportunity": {
+      "type": "object",
+      "required": [
+        "title",
+        "organization",
+        "last_seen_period",
+        "expected_watch_window",
+        "source_url",
+        "confidence"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "last_seen_period": {
+          "type": "string"
+        },
+        "expected_watch_window": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      }
+    },
+    "discoveredSource": {
+      "type": "object",
+      "required": [
+        "name",
+        "url",
+        "why_watch",
+        "confidence"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "source_type": {
+          "type": "string"
+        },
+        "why_watch": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      }
+    },
+    "vcInsight": {
+      "type": "object",
+      "required": [
+        "name",
+        "signal",
+        "source_url",
+        "confidence"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string",
+          "enum": [
+            "fundraising_signal",
+            "partner_fit",
+            "watchlist"
+          ]
+        },
+        "signal": {
+          "type": "string"
+        },
+        "fit": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      }
+    },
+    "procurementOpportunity": {
+      "type": "object",
+      "required": [
+        "title",
+        "buyer",
+        "source_url",
+        "confidence"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "buyer": {
+          "type": "string"
+        },
+        "procurement_channel": {
+          "type": "string"
+        },
+        "procurement_type": {
+          "type": "string"
+        },
+        "bid_notice_no": {
+          "type": "string"
+        },
+        "budget": {
+          "type": "string"
+        },
+        "bid_deadline": {
+          "type": "string"
+        },
+        "contract_method": {
+          "type": "string"
+        },
+        "eligibility": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      }
+    },
+    "eventOpportunity": {
+      "type": "object",
+      "required": [
+        "title",
+        "host",
+        "source_url",
+        "confidence"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "event_type": {
+          "type": "string"
+        },
+        "event_date": {
+          "type": "string"
+        },
+        "registration_deadline": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "audience": {
+          "type": "string"
+        },
+        "registration_url": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        }
+      }
+    }
+  }
+}

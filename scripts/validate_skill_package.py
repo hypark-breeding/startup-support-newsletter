@@ -46,10 +46,16 @@ def main() -> int:
     if not meta.get("description"):
         return fail("SKILL.md description is required")
 
-    for group_name in ("data_paths", "doc_paths", "example_paths", "schema_paths"):
+    for group_name in ("data_paths", "doc_paths", "example_paths", "schema_paths", "script_paths"):
         for rel_path in manifest.get(group_name, []):
             if not (ROOT / rel_path).is_file():
                 return fail(f"Missing manifest {group_name} entry: {rel_path}")
+
+    required_packages = manifest.get("install", {}).get("required_python_packages", [])
+    required_names = {package.get("name") for package in required_packages if package.get("required")}
+    for package_name in ("gpt-researcher", "crawl4ai"):
+        if package_name not in required_names:
+            return fail(f"Missing required Python package declaration: {package_name}")
 
     print(f"Validated skill package: {manifest['name']}")
     return 0

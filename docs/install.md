@@ -11,6 +11,13 @@ cd startup-support-newsletter
 bash scripts/install_skill.sh
 ```
 
+The installer also installs mandatory Python research tools before copying skills:
+
+- `gpt-researcher`
+- `crawl4ai`
+
+It runs `crawl4ai-setup` after package installation. If either package or the Crawl4AI setup step fails, the installer exits non-zero and the skill install is incomplete. Set `PYTHON_BIN` to choose the Python executable and `PIP_INSTALL_ARGS` to override the default `--user` pip install argument.
+
 The installer always writes to:
 
 ```text
