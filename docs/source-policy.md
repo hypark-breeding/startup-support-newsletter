@@ -5,9 +5,12 @@
 Use official sources first.
 
 1. Program owner or application portal.
-2. Seoul city, district, or affiliated public organization.
-3. National public aggregator such as Bizinfo or K-Startup.
-4. Private aggregators only as leads.
+2. National portals, central ministries, and public institutions.
+3. City/province, municipal, or affiliated public organizations.
+4. National public aggregators such as Bizinfo, K-Startup, SMEs24, KONEPS, or Data.go.kr.
+5. Private aggregators only as leads.
+
+When the user does not provide a URL, discover candidate official URLs first and clearly label any unverified lead sources.
 
 ## Verification
 

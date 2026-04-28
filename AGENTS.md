@@ -1,7 +1,7 @@
 # Repository Instructions
 
 This repository builds an agent-friendly workflow for finding Korean government
-startup support programs and turning them into regional briefings or newsletters.
+startup support programs, procurement notices, events, and investor-adjacent insights, then turning them into nationwide or regional briefings, designed reports, newsletters, or email deliveries.
 
 ## Core Principles
 
@@ -15,7 +15,7 @@ startup support programs and turning them into regional briefings or newsletters
 
 ## Scope
 
-- Initial coverage: Seoul metropolitan startup support sources.
+- Default coverage: nationwide Korea. Users may provide no URLs; discovery mode should find official source candidates first.
 - Primary installable skill: `skills/government-startup-support/SKILL.md`.
 - Compatibility skill path: `government-startup-support/SKILL.md`.
 - Source registry: `data/sources.yaml`.

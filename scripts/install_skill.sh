@@ -7,6 +7,9 @@ SOURCE="${ROOT}/skills/${SKILL_NAME}"
 HWPX_SKILL_NAME="hwpxskill"
 HWPX_REPO_URL="${HWPX_REPO_URL:-https://github.com/Canine89/hwpxskill.git}"
 HWPX_CACHE="${ROOT}/.cache/${HWPX_SKILL_NAME}"
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+PIP_INSTALL_ARGS="${PIP_INSTALL_ARGS:---user}"
+REQUIRED_PYTHON_PACKAGES=("gpt-researcher" "crawl4ai")
 
 if [ ! -f "${SOURCE}/SKILL.md" ]; then
   echo "Missing skill source: ${SOURCE}/SKILL.md" >&2
@@ -21,7 +24,57 @@ copy_dir() {
   rm -rf "${target}"
   mkdir -p "${target}"
   cp -R "${source}/." "${target}/"
-  printf 'Installed %s -> %s\n' "${label}" "${target}"
+  printf 'Installed %s -> %s
+' "${label}" "${target}"
+}
+
+install_required_python_tools() {
+  if ! command -v "${PYTHON_BIN}" >/dev/null 2>&1; then
+    echo "Missing required Python executable: ${PYTHON_BIN}" >&2
+    exit 1
+  fi
+
+  if ! "${PYTHON_BIN}" -m pip --version >/dev/null 2>&1; then
+    echo "Missing pip for ${PYTHON_BIN}. Install pip before running this installer." >&2
+    exit 1
+  fi
+
+  local pip_args=()
+  if [ -n "${PIP_INSTALL_ARGS}" ]; then
+    read -r -a pip_args <<< "${PIP_INSTALL_ARGS}"
+  fi
+
+  "${PYTHON_BIN}" -m pip install "${pip_args[@]}" "${REQUIRED_PYTHON_PACKAGES[@]}"
+
+  local user_base
+  user_base="$(${PYTHON_BIN} -m site --user-base 2>/dev/null || true)"
+  if [ -n "${user_base}" ]; then
+    export PATH="${user_base}/bin:${PATH}"
+  fi
+
+  if ! command -v crawl4ai-setup >/dev/null 2>&1; then
+    echo "Missing crawl4ai-setup after installing crawl4ai. Ensure the Python user bin directory is on PATH." >&2
+    exit 1
+  fi
+
+  crawl4ai-setup
+
+  "${PYTHON_BIN}" - <<'PY'
+import importlib.util
+import sys
+
+required = {
+    "gpt-researcher": "gpt_researcher",
+    "crawl4ai": "crawl4ai",
+}
+missing = [name for name, module in required.items() if importlib.util.find_spec(module) is None]
+if missing:
+    print("Missing required Python packages after install: " + ", ".join(missing), file=sys.stderr)
+    raise SystemExit(1)
+PY
+
+  printf 'Installed required research tools: %s
+' "${REQUIRED_PYTHON_PACKAGES[*]}"
 }
 
 install_main_skill() {
@@ -64,8 +117,10 @@ install_hwpxskill() {
   fi
 }
 
+install_required_python_tools
 install_main_skill
 fetch_hwpxskill
 install_hwpxskill
 
-printf 'Done. Agents can now load %s with companion skill %s.\n' "${SKILL_NAME}" "${HWPX_SKILL_NAME}"
+printf 'Done. Agents can now load %s with companion skill %s and required research tools.
+' "${SKILL_NAME}" "${HWPX_SKILL_NAME}"

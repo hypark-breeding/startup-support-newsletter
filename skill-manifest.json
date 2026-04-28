@@ -1,7 +1,7 @@
 {
   "schema_version": "0.1",
   "name": "government-startup-support",
-  "description": "Find Korean government and public-sector startup support announcements, starting with Seoul, and produce verified briefings, calendar schedules, newsletters, or business-plan fit analyses.",
+  "description": "Find nationwide Korean government and public-sector startup support announcements even when the user has no source URLs, then produce verified briefings, calendars, designed reports, newsletters, or email deliveries.",
   "license": "MIT",
   "homepage": "https://github.com/Malko-potatos/startup-support-newsletter",
   "skill_path": "skills/government-startup-support",
@@ -33,6 +33,21 @@
         "install_policy": "install_with_this_skill",
         "reason": "Required companion for HWPX announcement attachments."
       }
+    ],
+    "required_python_packages": [
+      {
+        "name": "gpt-researcher",
+        "import_name": "gpt_researcher",
+        "required": true,
+        "reason": "Required for broad opportunity discovery, source synthesis, and insight report research."
+      },
+      {
+        "name": "crawl4ai",
+        "import_name": "crawl4ai",
+        "required": true,
+        "setup_command": "crawl4ai-setup",
+        "reason": "Required for JavaScript-aware page extraction, markdown conversion, link discovery, and attachment discovery."
+      }
     ]
   },
   "metadata": {
@@ -40,9 +55,24 @@
     "locale": "ko-KR",
     "phase": "v0",
     "coverage": [
-      "seoul"
+      "national",
+      "all_korean_regions"
     ],
-    "source_count": 12
+    "source_count": 19,
+    "research_mode": "nationwide_source_discovery_and_insight",
+    "opportunity_types": [
+      "startup_support",
+      "procurement",
+      "event",
+      "meetup",
+      "vc_insight"
+    ],
+    "input_assumptions": {
+      "default_region": "national",
+      "user_urls_optional": true,
+      "discover_sources_when_urls_missing": true,
+      "source_list_not_complete": true
+    }
   },
   "doc_paths": [
     "docs/attachment-analysis.md",
@@ -52,7 +82,11 @@
     "docs/document-processing-integrations.md",
     "docs/mcp-roadmap.md",
     "docs/newsletter-format.md",
-    "docs/source-policy.md"
+    "docs/source-policy.md",
+    "docs/email-delivery.md",
+    "docs/research-insights.md",
+    "docs/procurement-opportunities.md",
+    "docs/events-and-meetups.md"
   ],
   "example_paths": [
     "calendar-view/README.md",
@@ -66,7 +100,10 @@
   "schema_paths": [
     "schemas/announcement.schema.json",
     "schemas/business-plan-profile.schema.json",
-    "schemas/fit-analysis.schema.json"
+    "schemas/fit-analysis.schema.json",
+    "schemas/insight-report.schema.json",
+    "schemas/procurement-opportunity.schema.json",
+    "schemas/event-opportunity.schema.json"
   ],
   "integration_hints": {
     "document_processing": {
@@ -86,6 +123,47 @@
         "repo": "https://github.com/Canine89/hwpxskill",
         "policy": "Use whenever an announcement attachment is HWPX."
       }
+    },
+    "research_insights": {
+      "principle": "If the user does not provide URLs, use GPT Researcher for nationwide source discovery and synthesis, then use Crawl4AI to extract candidate official pages and verify evidence.",
+      "default_window": "last_12_months_kst",
+      "external_tools": [
+        "gpt-researcher",
+        "crawl4ai"
+      ],
+      "email_delivery": {
+        "script": "scripts/send_report_email.py",
+        "providers": [
+          "smtp",
+          "sendgrid",
+          "mailgun"
+        ]
+      },
+      "install_policy": "required_with_skill_install",
+      "required_python_packages": [
+        "gpt-researcher",
+        "crawl4ai"
+      ],
+      "default_scope": "nationwide_korea"
+    },
+    "procurement": {
+      "principle": "Use official nationwide KONEPS/Data.go.kr sources first, then discover municipal contract sources for regional bid and public purchase opportunities.",
+      "required_env_vars_for_api": [
+        "DATA_GO_KR_SERVICE_KEY"
+      ],
+      "schemas": [
+        "schemas/procurement-opportunity.schema.json"
+      ]
+    },
+    "events_and_meetups": {
+      "principle": "Search official event pages and high-value ecosystem sources, then keep events separate from grants and procurement.",
+      "schemas": [
+        "schemas/event-opportunity.schema.json"
+      ]
     }
-  }
+  },
+  "script_paths": [
+    "scripts/render_insight_report.py",
+    "scripts/send_report_email.py"
+  ]
 }

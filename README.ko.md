@@ -2,13 +2,13 @@
 
 한국 정부와 공공기관의 창업지원사업 공고를 에이전트가 찾아보고, 지역별 브리핑, 일자별 일정표, 뉴스레터, 사업계획서 fit 분석 형태로 정리할 수 있게 만든 스킬 프로젝트입니다.
 
-초기 범위는 서울 권역입니다.
+기본 범위는 전국입니다. 사용자가 URL을 제공하지 않아도 GPT Researcher와 Crawl4AI로 공식 출처 후보를 찾고 검증합니다.
 
 예상 질문은 이런 형태입니다.
 
-- "서울 창업지원 정보 알려줘"
-- "마포구 예비창업자가 신청할 수 있는 지원사업 모아줘"
-- "이번 주 서울권 창업지원사업 뉴스레터 만들어줘"
+- "전국에서 올해 열린 창업지원사업과 반복 가능성이 높은 사업 모아줘"
+- "부산/경남 AI 스타트업이 볼 만한 지원사업, 행사, 수주 공고 찾아줘"
+- "URL은 모르는데 이번 주 창업지원사업 뉴스레터 만들어줘"
 
 ## 접근 방식
 
@@ -17,8 +17,8 @@
 - `skills/government-startup-support/SKILL.md`: 에이전트가 지원사업을 검색, 검증, 정규화, 요약하는 방법을 설명합니다.
 - `skill-manifest.json`: 코딩 에이전트가 읽을 수 있는 설치용 매니페스트입니다.
 - `scripts/install_skill.sh`: 스킬을 에이전트 홈 디렉터리에 설치합니다.
-- `data/sources.yaml`: 서울 권역 공식/준공식 사이트 목록입니다.
-- `data/regions.yaml`: 서울 지역과 자치구 alias를 관리합니다.
+- `data/sources.yaml`: 전국 공식 소스 시드와 지역별 확장 후보를 관리합니다.
+- `data/regions.yaml`: 전국, 시도, 서울 자치구 alias를 관리합니다.
 - `data/keywords.yaml`: 공고 검색에 필요한 한국어 키워드를 관리합니다.
 - `docs/`: 수집 정책, 첨부 공문 분석, 일정표, 뉴스레터 형식, MCP 확장 방향을 설명합니다.
 - `calendar-view/`: 정규화된 수집 일정을 보여주는 정적 캘린더 UI입니다.
@@ -46,7 +46,7 @@ cd startup-support-newsletter
 bash scripts/install_skill.sh
 ```
 
-설치 스크립트는 `skills/government-startup-support`와 HWPX 첨부파일 처리를 위한 `Canine89/hwpxskill`도 함께 설치합니다.
+설치 스크립트는 `skills/government-startup-support`, HWPX companion skill, 필수 Python 패키지 `gpt-researcher`와 `crawl4ai`를 함께 설치합니다. `crawl4ai-setup`까지 실행하며, 두 도구가 준비되지 않으면 발견형 리서치를 지원한다고 표시하지 않습니다.
 
 설치 대상은 아래 위치입니다.
 
@@ -58,4 +58,4 @@ bash scripts/install_skill.sh
 
 ## 현재 상태
 
-초기 범위는 서울입니다. 첫 버전은 전국 단위의 넓은 수집보다, 공식 소스 품질과 유지보수성을 우선합니다.
+현재 범위는 전국입니다. 서울 소스는 고품질 지역 시드로 유지하고, 전국/지자체/공공기관 소스는 GPT Researcher와 Crawl4AI 기반 발견 모드로 확장합니다.

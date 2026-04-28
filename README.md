@@ -1,6 +1,6 @@
 # Startup Support Newsletter
 
-Agent-installable skill project for finding Korean government startup support announcements and producing regional briefings, calendar schedules, newsletters, or business-plan fit analyses.
+Agent-installable skill project for finding nationwide Korean government startup support announcements, procurement, events, and investor-adjacent insights, then producing regional or nationwide briefings, calendar schedules, designed reports, newsletters, email deliveries, or business-plan fit analyses.
 
 ## Read This In
 
@@ -12,4 +12,4 @@ Agent-installable skill project for finding Korean government startup support an
 - Skill name: `government-startup-support`
 - Skill entrypoint: `skills/government-startup-support/SKILL.md`
 - Manifest: `skill-manifest.json`
-- Initial coverage: Seoul
+- Default coverage: nationwide Korea, with URL-optional source discovery
