@@ -12,53 +12,59 @@ from urllib.parse import urlparse
 STYLE = """
 :root {
   color-scheme: light;
-  --canvas: #f5f5f7;
-  --paper: #fbfbfd;
-  --paper-alt: #f1f2f4;
-  --ink: #1d1d1f;
-  --muted: #6e6e73;
-  --line: #d9d9de;
-  --primary: #0066cc;
-  --primary-soft: #e8f2ff;
+  --canvas: #ffffff;
+  --paper: #ffffff;
+  --paper-alt: #f7f7f7;
+  --ink: #222222;
+  --body: #3f3f3f;
+  --muted: #6a6a6a;
+  --line: #dddddd;
+  --primary: #ff385c;
+  --primary-active: #e00b41;
+  --on-primary: #ffffff;
+  --radius-card: 14px;
+  --radius-pill: 9999px;
+  --shadow: rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px 0, rgba(0, 0, 0, 0.1) 0 4px 8px 0;
 }
 body {
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
-  line-height: 1.47;
+  font-family: "Airbnb Cereal VF", Circular, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  line-height: 1.5;
 }
 .page {
-  max-width: 680px;
+  max-width: 760px;
   margin: 0 auto;
   background: var(--paper);
 }
 .eyebrow {
   display: inline-block;
   color: var(--muted);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
 }
 h1, h2, h3 {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+  font-family: "Airbnb Cereal VF", Circular, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   line-height: 1.2;
 }
 h1 {
-  margin: 8px 0 10px;
-  font-size: 34px;
-  font-weight: 600;
+  margin: 8px 0 12px;
+  font-size: 28px;
+  font-weight: 700;
   letter-spacing: 0;
 }
 h2 {
-  margin: 0 0 10px;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: 0;
+  margin: 0 0 12px;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.44px;
 }
 h3 {
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0;
 }
@@ -70,10 +76,17 @@ h3 {
 .summary {
   margin: 14px 0 0;
   max-width: 58ch;
-  font-size: 17px;
+  color: var(--body);
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: 0;
-  line-height: 1.45;
+  line-height: 1.5;
+}
+.salutation {
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 600;
 }
 .hero-actions,
 .item-actions {
@@ -85,7 +98,7 @@ h3 {
   flex-wrap: wrap;
 }
 .section {
-  padding: 28px;
+  padding: 32px 28px;
   border-top: 1px solid var(--line);
 }
 .section.light,
@@ -97,12 +110,19 @@ h3 {
   color: var(--ink);
 }
 .hero {
-  padding-top: 36px;
-  padding-bottom: 30px;
+  padding-top: 40px;
+  padding-bottom: 34px;
   border-top: 0;
 }
+.hero-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
 .section-inner {
-  max-width: 624px;
+  max-width: 680px;
   margin: 0 auto;
 }
 .section-kicker {
@@ -124,13 +144,13 @@ h3 {
 .stats-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 18px;
+  gap: 12px;
+  margin-top: 20px;
 }
 .stat {
-  padding: 12px;
+  padding: 14px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   background: var(--paper-alt);
 }
 .stat-label {
@@ -143,8 +163,8 @@ h3 {
 .stat-value {
   display: block;
   margin-top: 4px;
-  font-size: 22px;
-  font-weight: 600;
+  font-size: 21px;
+  font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0;
 }
@@ -154,7 +174,7 @@ h3 {
   margin-top: 8px;
 }
 .list-item {
-  padding: 16px 0;
+  padding: 18px 0;
   border-top: 1px solid var(--line);
 }
 .item-copy {
@@ -189,21 +209,25 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-size: 13px;
-  font-weight: 400;
+  border-radius: var(--radius-pill);
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
   line-height: 1;
   text-decoration: none;
-  transition: transform 120ms ease;
+  transition: background-color 120ms ease, transform 120ms ease;
 }
 .button {
   background: var(--primary);
-  color: var(--paper);
+  color: var(--on-primary);
+}
+.button:hover {
+  background: var(--primary-active);
 }
 .button-secondary {
-  border: 1px solid var(--primary);
-  color: var(--primary);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--paper);
 }
 .button:active,
 .button-secondary:active {
@@ -220,7 +244,7 @@ a {
 .text-list,
 .source-list {
   margin: 8px 0 0;
-  max-width: 624px;
+  max-width: 680px;
   padding: 0;
   list-style: none;
 }
@@ -238,7 +262,7 @@ a {
 }
 .warning-box,
 .footer-note {
-  max-width: 624px;
+  max-width: 680px;
   margin: 18px 0 0;
   color: var(--muted);
   font-size: 12px;
@@ -264,7 +288,10 @@ a {
     padding-top: 30px;
     padding-bottom: 26px;
   }
-  h1 { font-size: 30px; }
+  .hero-card {
+    padding: 18px;
+  }
+  h1 { font-size: 26px; }
   h2 { font-size: 22px; }
   h3 { font-size: 16px; }
   .summary { font-size: 16px; }
@@ -482,7 +509,9 @@ def render_report_html(report: dict[str, Any]) -> str:
   <main class="page">
     <section class="section light hero">
       <div class="section-inner">
-      <span class="eyebrow">Seoul PetTech Brief</span>
+      <div class="hero-card">
+      <span class="eyebrow">Startup Support Brief</span>
+        <p class="salutation">친애하는 박상희 대표님께</p>
         <h1>{escape(title)}</h1>
         <p class="meta">{escape(region)} · 조사 기간 {escape(period)} · 검증일 {escape(generated_at)}</p>
       <section class="summary">{escape(compact_text(report.get("summary") or "", 150))}</section>
@@ -503,6 +532,7 @@ def render_report_html(report: dict[str, Any]) -> str:
       <div class="hero-actions">
         <a class="button" href="#open-now">주요 공고</a>
         <a class="button-secondary" href="#sources">공식 출처</a>
+      </div>
       </div>
       </div>
     </section>

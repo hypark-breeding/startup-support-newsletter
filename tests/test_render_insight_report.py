@@ -69,9 +69,11 @@ class RenderInsightReportTests(unittest.TestCase):
         html = render.render_report_html(report)
 
         self.assertIn("\uc9c0\uae08 \uc2e0\uccad \uac00\ub2a5\ud55c \uacf5\uace0", html)
-        self.assertIn("\uc62c\ud574 \ub2e4\uc2dc \ub728\uac83 \uac00\ub2a5\uc131\uc774 \ub192\uc740 \uacf5\uace0", html)
+        self.assertIn("\uc62c\ud574 \ub2e4\uc2dc \ub730 \uac00\ub2a5\uc131\uc774 \ub192\uc740 \uacf5\uace0", html)
         self.assertIn("\ud22c\uc790/VC \uc778\uc0ac\uc774\ud2b8", html)
         self.assertIn("\ub2e4\uc74c \uc561\uc158", html)
+        self.assertIn("\uce5c\uc560\ud558\ub294 \ubc15\uc0c1\ud76c \ub300\ud45c\ub2d8\uaed8", html)
+        self.assertIn("\uce5c\uc560\ud558\ub294 \ubc15\uc0c1\ud76c \ub300\ud45c\ub2d8\uaed8", html)
         self.assertIn("&lt;script&gt;alert(&#x27;x&#x27;)&lt;/script&gt;", html)
         self.assertNotIn("<script>alert('x')</script>", html)
 
