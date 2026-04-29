@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import html
 import json
+import re
 from pathlib import Path
 from typing import Any, Iterable
 from urllib.parse import urlparse
@@ -301,6 +302,48 @@ a {
 """
 
 
+INLINE_STYLES = {
+    "body": "margin:0;background:#ffffff;color:#222222;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.5;",
+    "page": "max-width:760px;margin:0 auto;background:#ffffff;color:#222222;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;",
+    "section": "padding:32px 28px;border-top:1px solid #dddddd;background:#ffffff;color:#222222;",
+    "hero": "padding-top:40px;padding-bottom:34px;border-top:0;",
+    "section-inner": "max-width:680px;margin:0 auto;",
+    "hero-card": "border:1px solid #dddddd;border-radius:14px;background:#ffffff;box-shadow:0 2px 8px rgba(0,0,0,0.08);padding:24px;",
+    "eyebrow": "display:inline-block;color:#6a6a6a;font-size:11px;font-weight:700;letter-spacing:.32px;text-transform:uppercase;",
+    "salutation": "margin:0 0 10px;color:#222222;font-size:18px;font-weight:700;",
+    "meta": "color:#6a6a6a;font-size:13px;letter-spacing:0;",
+    "muted": "color:#6a6a6a;font-size:13px;letter-spacing:0;",
+    "summary": "margin:14px 0 0;max-width:58ch;color:#3f3f3f;font-size:16px;font-weight:400;line-height:1.5;",
+    "stats-row": "display:block;margin-top:20px;",
+    "stat": "display:inline-block;width:29%;min-width:150px;margin:0 8px 8px 0;padding:14px;border:1px solid #dddddd;border-radius:14px;background:#f7f7f7;vertical-align:top;",
+    "stat-label": "display:block;color:#6a6a6a;font-size:11px;font-weight:400;",
+    "stat-value": "display:block;margin-top:4px;font-size:21px;font-weight:700;line-height:1.1;color:#222222;",
+    "hero-actions": "margin-top:16px;",
+    "item-actions": "margin-top:16px;",
+    "section-kicker": "margin:0 0 6px;color:#6a6a6a;font-size:12px;font-weight:700;text-transform:uppercase;",
+    "section-lead": "margin:0 0 16px;max-width:60ch;color:#6a6a6a;font-size:14px;font-weight:400;",
+    "list-grid": "display:block;margin-top:8px;",
+    "list-item": "padding:18px 0;border-top:1px solid #dddddd;",
+    "item-copy": "margin:6px 0 0;max-width:62ch;color:#6a6a6a;font-size:14px;",
+    "meta-row": "margin-top:8px;color:#6a6a6a;font-size:12px;",
+    "meta-chip": "display:inline-block;margin:0 10px 6px 0;color:#6a6a6a;font-size:12px;",
+    "button": "display:inline-block;border-radius:9999px;padding:10px 20px;background:#ff385c;color:#ffffff;font-size:14px;font-weight:600;line-height:1;text-decoration:none;margin:0 10px 8px 0;",
+    "button-secondary": "display:inline-block;border:1px solid #dddddd;border-radius:9999px;padding:10px 20px;background:#ffffff;color:#222222;font-size:14px;font-weight:600;line-height:1;text-decoration:none;margin:0 10px 8px 0;",
+    "text-list": "margin:8px 0 0;max-width:680px;padding:0;list-style:none;",
+    "source-list": "margin:8px 0 0;max-width:680px;padding:0;list-style:none;",
+    "warning-box": "max-width:680px;margin:18px 0 0;color:#6a6a6a;font-size:12px;",
+    "footer-note": "max-width:680px;margin:18px 0 0;color:#6a6a6a;font-size:12px;",
+}
+
+
+TAG_STYLES = {
+    "h1": "margin:8px 0 12px;color:#222222;font-size:28px;font-weight:700;line-height:1.2;",
+    "h2": "margin:0 0 12px;color:#222222;font-size:22px;font-weight:600;line-height:1.2;",
+    "h3": "margin:0;color:#222222;font-size:16px;font-weight:700;line-height:1.2;",
+    "li": "margin:0;padding:12px 0;border-top:1px solid #dddddd;font-size:14px;color:#3f3f3f;",
+}
+
+
 NO_ITEMS = "\ud655\uc778\ub41c \ud56d\ubaa9\uc774 \uc5c6\uc2b5\ub2c8\ub2e4."
 NO_SOURCES = "\ucd9c\ucc98\uac00 \uc5c6\uc2b5\ub2c8\ub2e4."
 
@@ -342,7 +385,33 @@ def render_link(url: Any, label: str | None = None) -> str:
         return ""
     escaped = escape(url)
     text = escape(label or link_label(url))
-    return f'<a href="{escaped}">{text}</a>'
+    return f'<a href="{escaped}" style="color:#ff385c;text-decoration:none;">{text}</a>'
+
+
+def inline_email_styles(html_text: str) -> str:
+    """Add inline styles so email clients that strip <style> still render cleanly."""
+
+    def class_replacer(match: re.Match[str]) -> str:
+        tag = match.group("tag")
+        before = match.group("before")
+        classes = match.group("classes")
+        after = match.group("after")
+        styles = [INLINE_STYLES[name] for name in classes.split() if name in INLINE_STYLES]
+        if tag in TAG_STYLES:
+            styles.insert(0, TAG_STYLES[tag])
+        if not styles:
+            return match.group(0)
+        return f'<{tag}{before}class="{classes}" style="{"".join(styles)}"{after}>'
+
+    html_text = re.sub(
+        r'<(?P<tag>[a-z0-9]+)(?P<before>[^>]*)class="(?P<classes>[^"]+)"(?P<after>[^>]*)>',
+        class_replacer,
+        html_text,
+    )
+    for tag, style in TAG_STYLES.items():
+        html_text = re.sub(rf"<{tag}>", f'<{tag} style="{style}">', html_text)
+    html_text = html_text.replace("<body>", f'<body style="{INLINE_STYLES["body"]}">')
+    return html_text
 
 
 def render_badge(confidence: Any) -> str:
@@ -511,7 +580,7 @@ def render_report_html(report: dict[str, Any]) -> str:
       <div class="section-inner">
       <div class="hero-card">
       <span class="eyebrow">Startup Support Brief</span>
-        <p class="salutation">친애하는 박상희 대표님께</p>
+        <p class="salutation">친애하는 박상희 대표님께 🥰</p>
         <h1>{escape(title)}</h1>
         <p class="meta">{escape(region)} · 조사 기간 {escape(period)} · 검증일 {escape(generated_at)}</p>
       <section class="summary">{escape(compact_text(report.get("summary") or "", 150))}</section>
@@ -550,7 +619,7 @@ def render_report_html(report: dict[str, Any]) -> str:
             render_cards(limit_rows(items(report, "new_this_year"), 2), css_class="open", fields=open_fields, summary_keys=["why_it_matters", "benefit_summary"]),
             theme="dark",
             kicker="New This Year",
-            lead="서울 권역 펫테크가 참고할 만한 신규 축입니다.",
+            lead="이번 조사에서 새로 확인한 공고입니다.",
         ),
         render_section(
             "올해 다시 뜰 가능성이 높은 공고",
@@ -610,7 +679,7 @@ def main() -> int:
     input_path = Path(args.input)
     output_path = Path(args.output)
     report = json.loads(input_path.read_text(encoding="utf-8"))
-    html_text = render_report_html(report)
+    html_text = inline_email_styles(render_report_html(report))
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(html_text, encoding="utf-8")
     print(f"Rendered report: {output_path}")
